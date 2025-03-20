@@ -595,6 +595,7 @@ class ComposerStaticInitfd0115627e097aebd3ce530b8a36e4bb
     );
 
     public static $classMap = array (
+        'App\\Controller\\HomeController' => __DIR__ . '/../..' . '/src/Controller/HomeController.php',
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'CURLStringFile' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php',

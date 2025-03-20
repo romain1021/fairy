@@ -326,6 +326,13 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
+    <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.mx0UMmY.App\Controller\HomeController"/>
+      </call>
+    </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
       <tag name="kernel.event_subscriber"/>
@@ -830,7 +837,7 @@
     <service id="console.command.event_dispatcher_debug" class="Symfony\Bundle\FrameworkBundle\Command\EventDispatcherDebugCommand">
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.jlyTfzM"/>
+      <argument type="service" id=".service_locator.XsyfP82"/>
       <call method="setName">
         <argument>debug:event-dispatcher</argument>
       </call>
@@ -2093,7 +2100,7 @@
     <service id="translation.warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\TranslationsCacheWarmer">
       <tag name="container.service_subscriber" id="translator"/>
       <tag name="kernel.cache_warmer"/>
-      <argument type="service" id=".service_locator.J4b.DPX.translation.warmer"/>
+      <argument type="service" id=".service_locator.wSgjnB6.translation.warmer"/>
     </service>
     <service id="translation.provider_collection" class="Symfony\Component\Translation\Provider\TranslationProviderCollection">
       <argument type="collection"/>
@@ -2721,7 +2728,7 @@
     </service>
     <service id="routing.loader.container" class="Symfony\Component\Routing\Loader\ContainerLoader">
       <tag name="routing.loader"/>
-      <argument type="service" id=".service_locator.kODoftA"/>
+      <argument type="service" id=".service_locator.XWmhzGa"/>
       <argument>dev</argument>
     </service>
     <service id="routing.loader" class="Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader" public="true">
@@ -2734,7 +2741,7 @@
     <service id="router.default" class="Symfony\Bundle\FrameworkBundle\Routing\Router">
       <tag name="monolog.logger" channel="router"/>
       <tag name="container.service_subscriber" id="routing.loader"/>
-      <argument type="service" id=".service_locator.9i0MWoK.router.default"/>
+      <argument type="service" id=".service_locator.gOdCe1K.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
         <argument key="cache_dir">/Users/romain/www/fairy/var/cache/dev</argument>
@@ -2771,12 +2778,12 @@
     </service>
     <service id="router.expression_language_provider" class="Symfony\Component\Routing\Matcher\ExpressionLanguageProvider">
       <tag name="routing.expression_language_provider"/>
-      <argument type="service" id=".service_locator.1ZPWTRB"/>
+      <argument type="service" id=".service_locator.Kr.dDlB"/>
     </service>
     <service id="router.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer">
       <tag name="container.service_subscriber" id="router"/>
       <tag name="kernel.cache_warmer"/>
-      <argument type="service" id=".service_locator.HLwzKIm.router.cache_warmer"/>
+      <argument type="service" id=".service_locator.oCg4uHe.router.cache_warmer"/>
     </service>
     <service id="router_listener" class="Symfony\Component\HttpKernel\EventListener\RouterListener">
       <tag name="kernel.event_subscriber"/>
@@ -2898,6 +2905,7 @@
         <argument type="service" id="serializer.normalizer.datetimezone"/>
         <argument type="service" id="serializer.normalizer.dateinterval"/>
         <argument type="service" id="serializer.normalizer.form_error"/>
+        <argument type="service" id="serializer.normalizer.backed_enum"/>
         <argument type="service" id="serializer.normalizer.data_uri"/>
         <argument type="service" id="serializer.normalizer.json_serializable"/>
         <argument type="service" id="serializer.denormalizer.array"/>
@@ -3044,6 +3052,9 @@
           <factory class="Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer" method="isDebug"/>
         </service>
       </argument>
+    </service>
+    <service id="serializer.normalizer.backed_enum" class="Symfony\Component\Serializer\Normalizer\BackedEnumNormalizer">
+      <tag name="serializer.normalizer" priority="-915"/>
     </service>
     <service id="property_info" class="Symfony\Component\PropertyInfo\PropertyInfoExtractor">
       <argument type="iterator">
@@ -3582,7 +3593,7 @@
       </argument>
     </service>
     <service id="notifier" class="Symfony\Component\Notifier\Notifier">
-      <argument type="service" id=".service_locator.dw8O4oN"/>
+      <argument type="service" id=".service_locator.UkE3SaZ"/>
       <argument type="service" id="notifier.channel_policy" on-invalid="ignore"/>
       <call method="addAdminRecipient">
         <argument type="service" id="notifier.admin_recipient.0"/>
@@ -4037,23 +4048,21 @@
     </service>
     <service id="doctrine.dbal.default_connection" class="Doctrine\DBAL\Connection" public="true">
       <argument type="collection">
-        <argument key="url">%env(resolve:DATABASE_URL)%</argument>
-        <argument key="use_savepoints">true</argument>
         <argument key="driver">pdo_mysql</argument>
+        <argument key="url">%env(resolve:DATABASE_URL)%</argument>
+        <argument key="charset">UTF8</argument>
         <argument key="idle_connection_ttl">600</argument>
         <argument key="host">localhost</argument>
         <argument key="port">null</argument>
         <argument key="user">root</argument>
         <argument key="password">null</argument>
         <argument key="driverOptions" type="collection"/>
+        <argument key="serverVersion" type="string">5.7</argument>
         <argument key="defaultTableOptions" type="collection"/>
       </argument>
       <argument type="service" id="doctrine.dbal.default_connection.configuration"/>
       <argument type="service" id="doctrine.dbal.default_connection.event_manager"/>
       <argument type="collection"/>
-      <call method="setNestTransactionsWithSavepoints">
-        <argument>true</argument>
-      </call>
       <factory service="doctrine.dbal.connection_factory" method="createConnection"/>
     </service>
     <service id="Doctrine\Bundle\DoctrineBundle\Dbal\ManagerRegistryAwareConnectionProvider" class="Doctrine\Bundle\DoctrineBundle\Dbal\ManagerRegistryAwareConnectionProvider">
@@ -4358,8 +4367,7 @@
         <argument type="service" id="doctrine.orm.container_repository_factory"/>
       </call>
     </service>
-    <service id="doctrine.orm.default_annotation_metadata_driver" class="Doctrine\ORM\Mapping\Driver\AnnotationDriver">
-      <argument type="service" id="annotations.cached_reader"/>
+    <service id="doctrine.orm.default_attribute_metadata_driver" class="Doctrine\ORM\Mapping\Driver\AttributeDriver">
       <argument type="collection">
         <argument>/Users/romain/www/fairy/src/Entity</argument>
       </argument>
@@ -4816,7 +4824,7 @@
     <service id="twig.template_cache_warmer" class="Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheWarmer">
       <tag name="kernel.cache_warmer"/>
       <tag name="container.service_subscriber" id="twig"/>
-      <argument type="service" id=".service_locator.aq4MYft.twig.template_cache_warmer"/>
+      <argument type="service" id=".service_locator.v.Wwsjy.twig.template_cache_warmer"/>
       <argument type="service" id="twig.template_iterator"/>
     </service>
     <service id="twig.loader.native_filesystem" class="Twig\Loader\FilesystemLoader">
@@ -5573,7 +5581,7 @@
       <tag name="container.no_preload"/>
       <argument>%security.firewalls%</argument>
       <argument type="service" id=".service_locator.zJyh7qS"/>
-      <argument type="service" id=".service_locator.jlyTfzM"/>
+      <argument type="service" id=".service_locator.XsyfP82"/>
       <argument type="collection">
         <argument key="main" type="collection"/>
       </argument>
@@ -5896,7 +5904,7 @@
         <argument key="default" type="collection">
           <argument type="collection">
             <argument>App\Entity</argument>
-            <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
+            <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
           </argument>
         </argument>
       </argument>
@@ -6037,6 +6045,9 @@
     <service id="maker.maker.make_stimulus_controller" class="Symfony\Bundle\MakerBundle\Maker\MakeStimulusController">
       <tag name="maker.command"/>
     </service>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.gSv9zYw" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6353,21 +6364,21 @@
         <argument>Creates a new Stimulus controller</argument>
       </call>
     </service>
-    <service id=".service_locator.KfbR3DY" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.xUrKPVU" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="loader" type="service_closure" id=".errored..service_locator.KfbR3DY.Symfony\Component\Config\Loader\LoaderInterface"/>
+        <argument key="loader" type="service_closure" id=".errored..service_locator.xUrKPVU.Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
-    <service id=".service_locator.mGHEj8d" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator._tHndrl" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
-        <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
-        <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
-        <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
-        <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
-        <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
+        <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.xUrKPVU"/>
+        <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.xUrKPVU"/>
+        <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.xUrKPVU"/>
+        <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.xUrKPVU"/>
+        <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.xUrKPVU"/>
+        <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.xUrKPVU"/>
       </argument>
     </service>
     <service id=".service_locator.19_mNxd" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -6785,53 +6796,78 @@
         <argument key="translation.loader.yml" type="service_closure" id="translation.loader.yml"/>
       </argument>
     </service>
-    <service id=".service_locator.J4b.DPX" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.mx0UMmY" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="doctrine" type="service_closure" id="doctrine" on-invalid="ignore"/>
+        <argument key="form.factory" type="service_closure" id="form.factory" on-invalid="ignore"/>
+        <argument key="http_kernel" type="service_closure" id="http_kernel" on-invalid="ignore"/>
+        <argument key="message_bus" type="service_closure" id="debug.traced.messenger.bus.default" on-invalid="ignore"/>
+        <argument key="messenger.default_bus" type="service_closure" id="debug.traced.messenger.bus.default" on-invalid="ignore"/>
+        <argument key="parameter_bag" type="service_closure" id="parameter_bag" on-invalid="ignore"/>
+        <argument key="request_stack" type="service_closure" id="request_stack" on-invalid="ignore"/>
+        <argument key="router" type="service_closure" id="router.default" on-invalid="ignore"/>
+        <argument key="security.authorization_checker" type="service_closure" id="security.authorization_checker" on-invalid="ignore"/>
+        <argument key="security.csrf.token_manager" type="service_closure" id="security.csrf.token_manager" on-invalid="ignore"/>
+        <argument key="security.token_storage" type="service_closure" id="security.token_storage" on-invalid="ignore"/>
+        <argument key="serializer" type="service_closure" id="serializer" on-invalid="ignore"/>
+        <argument key="session" type="service_closure" id=".session.deprecated" on-invalid="ignore"/>
+        <argument key="twig" type="service_closure" id="twig" on-invalid="ignore"/>
+      </argument>
+    </service>
+    <service id=".service_locator.mx0UMmY.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\HomeController"/>
+      <argument>App\Controller\HomeController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.mx0UMmY" method="withContext"/>
+    </service>
+    <service id=".service_locator.wSgjnB6" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="translator" type="service_closure" id="translator.data_collector"/>
       </argument>
     </service>
-    <service id=".service_locator.J4b.DPX.translation.warmer" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.wSgjnB6.translation.warmer" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="translation.warmer"/>
       <argument>translation.warmer</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.J4b.DPX" method="withContext"/>
+      <factory service=".service_locator.wSgjnB6" method="withContext"/>
     </service>
-    <service id=".service_locator.9i0MWoK" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.gOdCe1K" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="routing.loader" type="service_closure" id="routing.loader"/>
       </argument>
     </service>
-    <service id=".service_locator.9i0MWoK.router.default" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.gOdCe1K.router.default" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="router.default"/>
       <argument>router.default</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.9i0MWoK" method="withContext"/>
+      <factory service=".service_locator.gOdCe1K" method="withContext"/>
     </service>
-    <service id=".service_locator.HLwzKIm" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.oCg4uHe" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="router" type="service_closure" id="router.default"/>
       </argument>
     </service>
-    <service id=".service_locator.HLwzKIm.router.cache_warmer" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.oCg4uHe.router.cache_warmer" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="router.cache_warmer"/>
       <argument>router.cache_warmer</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.HLwzKIm" method="withContext"/>
+      <factory service=".service_locator.oCg4uHe" method="withContext"/>
     </service>
-    <service id=".service_locator.aq4MYft" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.v.Wwsjy" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="twig" type="service_closure" id="twig"/>
       </argument>
     </service>
-    <service id=".service_locator.aq4MYft.twig.template_cache_warmer" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.v.Wwsjy.twig.template_cache_warmer" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="twig.template_cache_warmer"/>
       <argument>twig.template_cache_warmer</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.aq4MYft" method="withContext"/>
+      <factory service=".service_locator.v.Wwsjy" method="withContext"/>
     </service>
     <service id=".service_locator.XXv1IfR" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -6839,20 +6875,20 @@
         <argument key="reverse_container" type="service_closure" id="reverse_container" on-invalid="ignore_uninitialized"/>
       </argument>
     </service>
-    <service id=".service_locator.jlyTfzM" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.XsyfP82" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="event_dispatcher" type="service_closure" id="debug.event_dispatcher"/>
         <argument key="security.event_dispatcher.main" type="service_closure" id="security.event_dispatcher.main"/>
       </argument>
     </service>
-    <service id=".service_locator.kODoftA" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.XWmhzGa" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel" type="service_closure" id="kernel"/>
       </argument>
     </service>
-    <service id=".service_locator.1ZPWTRB" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Kr.dDlB" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="env" type="service_closure" id="container.getenv"/>
@@ -6869,7 +6905,7 @@
         <argument key="session_factory" type="service_closure" id="session.factory" on-invalid="ignore"/>
       </argument>
     </service>
-    <service id=".service_locator.dw8O4oN" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.UkE3SaZ" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="browser" type="service_closure" id="notifier.channel.browser"/>
@@ -6956,12 +6992,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.mGHEj8d"/>
+      <argument type="service" id=".service_locator._tHndrl"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.mGHEj8d"/>
+      <argument type="service" id=".service_locator._tHndrl"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -6976,11 +7012,11 @@
     </service>
     <service id=".doctrine.orm.default_metadata_driver.inner" class="Doctrine\Persistence\Mapping\Driver\MappingDriverChain">
       <call method="addDriver">
-        <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
+        <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
         <argument>App\Entity</argument>
       </call>
     </service>
-    <service id=".errored..service_locator.KfbR3DY.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface"/>
+    <service id=".errored..service_locator.xUrKPVU.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface"/>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>about</argument>
       <argument type="collection"/>
@@ -7457,7 +7493,7 @@
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.M4HTUge"/>
+      <argument type="service" id=".service_locator.ca286Cb"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -7563,7 +7599,7 @@
         <argument key="make:stimulus-controller">maker.auto_command.make_stimulus_controller</argument>
       </argument>
     </service>
-    <service id=".service_locator.M4HTUge" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.ca286Cb" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service_closure" id=".console.command.about.lazy"/>
@@ -7914,7 +7950,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.mGHEj8d"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator._tHndrl"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -7938,11 +7974,12 @@
     <service id=".service_locator.80edgLI" alias="messenger.receiver_locator"/>
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
-    <service id=".service_locator.74LyejU" alias=".service_locator.mGHEj8d"/>
+    <service id=".service_locator.uYp3OwG" alias=".service_locator._tHndrl"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.Za9MpXe" alias=".service_locator.y4dplYt"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
+    <service id=".service_locator.0ghLsew" alias=".service_locator.mx0UMmY"/>
     <service id="validator" alias="debug.validator" public="true"/>
     <service id="http_client" alias=".debug.http_client"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher" public="true"/>
@@ -7964,9 +8001,10 @@
     <service id="argument_resolver.not_tagged_controller" alias="debug.argument_resolver.not_tagged_controller"/>
     <service id="messenger.bus.default" alias="debug.traced.messenger.bus.default"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
-    <service id=".service_locator.JBAFp66" alias=".service_locator.KfbR3DY"/>
+    <service id=".service_locator.uo5c0SP" alias=".service_locator.xUrKPVU"/>
+    <service id=".service_locator.A740LBW" alias=".service_locator.mx0UMmY"/>
     <service id=".service_locator.sf85gDo" alias=".service_locator.XmPJruK"/>
-    <service id=".service_locator.9YCWxeJ" alias=".service_locator.dw8O4oN"/>
+    <service id=".service_locator.pFwChgS" alias=".service_locator.UkE3SaZ"/>
     <service id=".service_locator.aa1PbBb" alias=".service_locator.nLgZj7R"/>
   </services>
 </container>
