@@ -333,6 +333,7 @@
         <argument type="service" id=".service_locator.mx0UMmY.App\Controller\HomeController"/>
       </call>
     </service>
+    <service id="App\Controller\loginControlleur" class="App\Controller\loginControlleur" autowire="true" autoconfigure="true"/>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
       <tag name="kernel.event_subscriber"/>
