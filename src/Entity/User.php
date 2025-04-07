@@ -32,7 +32,7 @@ class User implements UserInterface
     private bool $isVerified = false;
 
     #[ORM\Column(type: "string", length: 255)]
-    private string $role = 'user';
+    private string $role = 'user'; // Remplacer 'enum' par 'string'
 
     #[ORM\Column(type: "datetime", options: ["default" => "CURRENT_TIMESTAMP"])]
     private \DateTimeInterface $createdAt;
@@ -58,8 +58,7 @@ class User implements UserInterface
 
     public function getSalt(): ?string
     {
-        // No salt needed when using bcrypt or Argon2
-        return null;
+        return null; // No salt needed when using bcrypt or Argon2
     }
 
     public function getUsername(): string
@@ -154,5 +153,4 @@ class User implements UserInterface
     {
         // If storing any sensitive data temporarily, clear it here
     }
-
 }
