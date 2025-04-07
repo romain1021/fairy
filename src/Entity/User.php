@@ -31,7 +31,7 @@ class User implements UserInterface
     #[ORM\Column(type: "boolean")]
     private bool $isVerified = false;
 
-    #[ORM\Column(type: "string", enumType: Role::class)]
+    #[ORM\Column(type: "string", length: 255)]
     private string $role = 'user';
 
     #[ORM\Column(type: "datetime", options: ["default" => "CURRENT_TIMESTAMP"])]
@@ -50,6 +50,12 @@ class User implements UserInterface
         return $this->password;
     }
 
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+        return $this;
+    }
+
     public function getSalt(): ?string
     {
         // No salt needed when using bcrypt or Argon2
@@ -59,6 +65,12 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+        return $this;
     }
 
     public function setEmail(string $email): self
@@ -86,6 +98,56 @@ class User implements UserInterface
     public function getBio(): ?string
     {
         return $this->bio;
+    }
+
+    public function setBio(?string $bio): self
+    {
+        $this->bio = $bio;
+        return $this;
+    }
+
+    public function getProfilePicture(): ?string
+    {
+        return $this->profilePicture;
+    }
+
+    public function setProfilePicture(?string $profilePicture): self
+    {
+        $this->profilePicture = $profilePicture;
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+        return $this;
+    }
+
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+        return $this;
+    }
+
+    public function getCreatedAt(): \DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+        return $this;
     }
 
     public function eraseCredentials(): void
