@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class AuthController extends AbstractController
+class loginControlleur extends AbstractController
 {
     #[Route('/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
@@ -31,12 +31,14 @@ class AuthController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user)
+            ->add('register', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class)
+            ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $password = $passwordEncoder->encodePassword($user, $form->get('password')->getData());
             $user->setPassword($password);
 
             $entityManager->persist($user);
