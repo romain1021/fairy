@@ -37,7 +37,8 @@ class User implements UserInterface
     #[ORM\Column(type: "datetime", options: ["default" => "CURRENT_TIMESTAMP"])]
     private \DateTimeInterface $createdAt;
 
-    // ✅ Implement required methods from UserInterface
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    private ?string $verificationToken = null;
 
     public function getRoles(): array
     {
@@ -60,10 +61,36 @@ class User implements UserInterface
         return $this->username;
     }
 
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getVerificationToken(): ?string
+    {
+        return $this->verificationToken;
+    }
+
+    public function setVerificationToken(?string $verificationToken): self
+    {
+        $this->verificationToken = $verificationToken;
+        return $this;
+    }
+
+    public function getBio(): ?string
+    {
+        return $this->bio;
+    }
+
     public function eraseCredentials(): void
     {
         // If storing any sensitive data temporarily, clear it here
     }
 
-    // ✅ Add getters and setters if missing...
 }

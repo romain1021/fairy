@@ -31,7 +31,11 @@ class loginControlleur extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user)
+        $form = $this->createFormBuilder($user)
+            ->add('username')
+            ->add('email')
+            ->add('password')
+            ->add('bio')
             ->add('register', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class)
             ->getForm();
 
