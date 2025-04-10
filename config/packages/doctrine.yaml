@@ -1,11 +1,11 @@
 doctrine:
     dbal:
         driver: 'pdo_mysql'
-        server_version: '5.7' # La version de MySQL que tu utilises
-        url: '%env(resolve:DATABASE_URL)%'  # Le lien vers la base de données (voir ci-dessous)
+        server_version: '5.7'  # La version de MySQL que tu utilises
+        url: '%env(resolve:DATABASE_URL)%'  # Le lien vers la base de données
         charset: UTF8
         types:
-            enum: App\DBAL\Types\EnumType # Utilisation du type personnalisé pour enum
+            enum: App\DBAL\Types\EnumType  # Utilisation de ton type personnalisé pour enum
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
@@ -42,3 +42,4 @@ when@prod:
                     adapter: cache.app
                 doctrine.system_cache_pool:
                     adapter: cache.system
+

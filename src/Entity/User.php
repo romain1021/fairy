@@ -37,9 +37,6 @@ class User implements UserInterface
     #[ORM\Column(type: "datetime", options: ["default" => "CURRENT_TIMESTAMP"])]
     private \DateTimeInterface $createdAt;
 
-    #[ORM\Column(type: "string", length: 255, nullable: true)]
-    private ?string $verificationToken = null;
-
     public function getRoles(): array
     {
         return [$this->role]; // Return role(s) as an array
@@ -81,17 +78,6 @@ class User implements UserInterface
     public function getEmail(): string
     {
         return $this->email;
-    }
-
-    public function getVerificationToken(): ?string
-    {
-        return $this->verificationToken;
-    }
-
-    public function setVerificationToken(?string $verificationToken): self
-    {
-        $this->verificationToken = $verificationToken;
-        return $this;
     }
 
     public function getBio(): ?string
