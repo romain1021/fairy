@@ -37,6 +37,11 @@ class User implements UserInterface
     #[ORM\Column(type: "datetime", options: ["default" => "CURRENT_TIMESTAMP"])]
     private \DateTimeInterface $createdAt;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getRoles(): array
     {
         return [$this->role]; // Return role(s) as an array
