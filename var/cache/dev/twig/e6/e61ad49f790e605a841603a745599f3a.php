@@ -70,6 +70,10 @@ class __TwigTemplate_5ee765f2ff71cbcc56b881848c6d69b0 extends Template
         <br>
         <button type=\"submit\">Se connecter</button>
     </form>
+    <p>Pas encore de compte ? <a href=\"";
+        // line 21
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
+        yield "\">Inscrivez-vous ici</a></p>
 </body>
 </html>";
         
@@ -102,7 +106,7 @@ class __TwigTemplate_5ee765f2ff71cbcc56b881848c6d69b0 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  62 => 12,  56 => 10,  54 => 9,  44 => 1,);
+        return array (  75 => 21,  62 => 12,  56 => 10,  54 => 9,  44 => 1,);
     }
 
     public function getSourceContext()
@@ -127,6 +131,7 @@ class __TwigTemplate_5ee765f2ff71cbcc56b881848c6d69b0 extends Template
         <br>
         <button type=\"submit\">Se connecter</button>
     </form>
+    <p>Pas encore de compte ? <a href=\"{{ path('app_register') }}\">Inscrivez-vous ici</a></p>
 </body>
 </html>", "auth/login.html.twig", "/Users/romain/www/fairy/templates/auth/login.html.twig");
     }

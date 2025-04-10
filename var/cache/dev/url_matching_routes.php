@@ -12,6 +12,7 @@ return [
             [['_route' => 'home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null],
             [['_route' => 'login_redirect', 'route' => 'login', '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController'], null, null, null, false, false, null],
         ],
+        '/home' => [[['_route' => 'app_home', '_controller' => 'App\\Controller\\HomeController::indexPosts'], null, null, null, false, false, null]],
         '/login' => [
             [['_route' => 'app_login', '_controller' => 'App\\Controller\\loginControlleur::login'], null, null, null, false, false, null],
             [['_route' => 'login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null],

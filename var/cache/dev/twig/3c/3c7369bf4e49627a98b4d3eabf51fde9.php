@@ -109,14 +109,13 @@ class __TwigTemplate_f26be022c3cde9af9f094b13b0f98d34 extends Template
         // line 12
         yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 12, $this->source); })()), "bio", [], "any", false, false, false, 12), 'row');
         yield "
-    <button class=\"btn\">S'inscrire</button>
 ";
-        // line 14
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 14, $this->source); })()), 'form_end');
+        // line 13
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 13, $this->source); })()), 'form_end');
         yield "
 
 <p>Vous avez déjà un compte ? <a href=\"";
-        // line 16
+        // line 15
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
         yield "\">Connectez-vous</a></p>
 ";
@@ -150,7 +149,7 @@ class __TwigTemplate_f26be022c3cde9af9f094b13b0f98d34 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  120 => 16,  115 => 14,  110 => 12,  106 => 11,  102 => 10,  98 => 9,  94 => 8,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  119 => 15,  114 => 13,  110 => 12,  106 => 11,  102 => 10,  98 => 9,  94 => 8,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -167,7 +166,6 @@ class __TwigTemplate_f26be022c3cde9af9f094b13b0f98d34 extends Template
     {{ form_row(form.email) }}
     {{ form_row(form.password) }}
     {{ form_row(form.bio) }}
-    <button class=\"btn\">S'inscrire</button>
 {{ form_end(form) }}
 
 <p>Vous avez déjà un compte ? <a href=\"{{ path('app_login') }}\">Connectez-vous</a></p>

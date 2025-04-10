@@ -66,6 +66,8 @@ return [[
 '[C]App%5CController%5CHomeController' => 1,
 'App%5CController%5CHomeController%23index' => 0,
 '[C]App%5CController%5CHomeController%23index' => 1,
+'App%5CController%5CHomeController%23indexPosts' => 0,
+'[C]App%5CController%5CHomeController%23indexPosts' => 1,
 'Doctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController' => 0,
 '[C]Doctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController' => 1,
 'Doctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController%23__construct' => 0,
@@ -634,6 +636,6 @@ return [[
 ], [
 
 0 => [],
-1 => 1744274848,
+1 => 1744277182,
 
 ]];

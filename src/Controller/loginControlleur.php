@@ -70,9 +70,11 @@ class loginControlleur extends AbstractController
         $form = $this->createFormBuilder($user)
             ->add('username')
             ->add('email')
-            ->add('password')
+            ->add('password', \Symfony\Component\Form\Extension\Core\Type\PasswordType::class)
             ->add('bio')
-            ->add('register', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class)
+            ->add('submit', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class, [
+                'label' => 'S\'inscrire'
+            ])
             ->getForm();
 
         $form->handleRequest($request);
