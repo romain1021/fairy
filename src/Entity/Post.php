@@ -30,12 +30,8 @@ class Post
 
     #[ORM\Column(type: 'json', nullable: true)]
     private ?array $hashtags = null;
-
     #[ORM\Column(type: 'datetime', nullable: true, options: ["default" => "CURRENT_TIMESTAMP"])]
     private ?\DateTime $createdAt = null;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $title = null;
 
     public function getId(): int
     {
@@ -116,17 +112,6 @@ class Post
     public function setCreatedAt(?\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(?string $title): self
-    {
-        $this->title = $title;
         return $this;
     }
 }
