@@ -13,7 +13,7 @@
         <ul>
             {% for post in posts %}
                 <li>
-                    <strong>{{ post.title }}</strong> - {{ post.content }} ({{ post.createdAt|date('d/m/Y H:i') }})
+                    {{ post.content }} ({{ post.createdAt|date('d/m/Y H:i') }})
                 </li>
             {% endfor %}
         </ul>
