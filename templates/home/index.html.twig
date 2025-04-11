@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}
+    Accueil
+{% endblock %}
 
 {% block body %}
-    <h1>{{ title }}</h1>
+    <h1>Accueil</h1>
     <p>Bienvenue sur notre site Symfony !</p>
 
     <h2>Posts</h2>
@@ -16,6 +18,6 @@
             {% endfor %}
         </ul>
     {% else %}
-        <p>Aucun post disponible pour le moment.</p>
+        <p>Aucun post disponible.</p>
     {% endif %}
 {% endblock %}
