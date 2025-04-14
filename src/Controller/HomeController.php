@@ -8,30 +8,28 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\PostRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Entity\User;
+use App\Entity\Post;
+use Doctrine\ORM\EntityManagerInterface;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(PostRepository $postRepository, SessionInterface $session): Response
+    public function index(PostRepository $postRepository, SessionInterface $session, EntityManagerInterface $entityManager): Response
     {
+        // Configure l'EntityManager global pour les objets Post
+        Post::setGlobalEntityManager($entityManager);
+
         // Vérifier si l'utilisateur est authentifié
         if (!$this->getUser() && !$session->has('user_id')) {
             // Rediriger l'utilisateur non authentifié vers la page de login
             return $this->redirectToRoute('app_login');
         }
 
-        // Récupérer les posts triés par date de création décroissante
         $posts = $postRepository->findBy([], ['createdAt' => 'DESC']);
 
-        // Ajouter une propriété temporaire pour afficher le nom de l'utilisateur
         foreach ($posts as $post) {
-            $userId = $post->getUser()?->getId();
-            if ($userId) {
-                $user = User::getUserById($this->getDoctrine()->getManager(), $userId);
-                $post->username = $user ? $user->getUsername() : 'Utilisateur inconnu';
-            } else {
-                $post->username = 'Utilisateur inconnu';
-            }
+            $user = $post->getUser();
+            $post->username = $user ? $user->getUsername() : 'Utilisateur inconnu';
         }
 
         return $this->render('home/index.html.twig', [

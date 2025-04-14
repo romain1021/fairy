@@ -15,17 +15,15 @@ class PostController extends AbstractController
     #[Route('/post', name: 'post')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $user = $this->getUser();
         $session = $request->getSession();
 
-
-        $post = new Post();
+        $post = new Post($entityManager); // Passez l'EntityManager au constructeur
         $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setCreatedAt(new \DateTime());
-            $post->setUser($user); // Associe l'utilisateur connecté au post
+            $post->setUserId($session->get('user_id')); // Associe l'utilisateur connecté au post
             $entityManager->persist($post);
             $entityManager->flush();
 

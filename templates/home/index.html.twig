@@ -26,11 +26,7 @@
                             </div>
                             <div class="post-author">
                                 <strong>
-                                    {% if post.user is not null %}
-                                        {{ post.user.username }}
-                                    {% else %}
-                                        Utilisateur inconnu
-                                    {% endif %}
+                                    {{ post.getUserName() }}
                                 </strong>
                             </div>
                             <div class="post-date">

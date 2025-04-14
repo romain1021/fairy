@@ -3,11 +3,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity]
 #[ORM\Table(name: "users")]
-class User implements UserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,6 +24,25 @@ class User implements UserInterface
     private string $password;
 
     #[ORM\Column(type: "text", nullable: true)]
+
+    public static function getUserById(int $id, object $entityManager): ?array
+    {
+        $userRepository = $entityManager->getRepository(self::class);
+        $user = $userRepository->find($id);
+
+        if (!$user) {
+            return null;
+        }
+
+        return [
+            'id' => $user->getId(),
+            'username' => $user->getUsername(),
+            'email' => $user->getEmail(),
+            'bio' => $user->getBio(),
+            'profilePicture' => $user->getProfilePicture(),
+            'isVerified' => $user->isVerified(),
+        ];
+    }
     private ?string $bio = null;
 
     #[ORM\Column(type: "string", length: 255, nullable: true)]
@@ -38,9 +57,19 @@ class User implements UserInterface
     #[ORM\Column(type: "datetime", options: ["default" => "CURRENT_TIMESTAMP"])]
     private \DateTimeInterface $createdAt;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime(); // Initialisation par défaut
+    }
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->username;
     }
 
     public function getRoles(): array
@@ -64,9 +93,9 @@ class User implements UserInterface
         return null; // No salt needed when using bcrypt or Argon2
     }
 
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
-        return $this->username;
+        return $this->username; // Supposant que la propriété `username` existe dans la classe User
     }
 
     public function setUsername(string $username): self
@@ -75,15 +104,15 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
     public function setEmail(string $email): self
     {
         $this->email = $email;
         return $this;
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
     }
 
     public function getBio(): ?string
@@ -119,17 +148,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRole(): string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
-        return $this;
-    }
-
     public function getCreatedAt(): \DateTimeInterface
     {
         return $this->createdAt;
@@ -144,10 +162,5 @@ class User implements UserInterface
     public function eraseCredentials(): void
     {
         // If storing any sensitive data temporarily, clear it here
-    }
-
-    public static function getUserById(EntityManagerInterface $entityManager, int $id): ?self
-    {
-        return $entityManager->getRepository(self::class)->find($id);
     }
 }

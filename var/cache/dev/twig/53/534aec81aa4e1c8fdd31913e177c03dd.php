@@ -130,24 +130,14 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                                 <strong>
                                     ";
                 // line 29
-                if ( !(null === CoreExtension::getAttribute($this->env, $this->source, $context["post"], "user", [], "any", false, false, false, 29))) {
-                    // line 30
-                    yield "                                        ";
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["post"], "user", [], "any", false, false, false, 30), "username", [], "any", false, false, false, 30), "html", null, true);
-                    yield "
-                                    ";
-                } else {
-                    // line 32
-                    yield "                                        Utilisateur inconnu
-                                    ";
-                }
-                // line 34
-                yield "                                </strong>
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "getUserName", [], "method", false, false, false, 29), "html", null, true);
+                yield "
+                                </strong>
                             </div>
                             <div class=\"post-date\">
                                 ";
-                // line 37
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 37), "d/m/Y H:i"), "html", null, true);
+                // line 33
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 33), "d/m/Y H:i"), "html", null, true);
                 yield "
                             </div>
                         </div>
@@ -157,15 +147,15 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 42
+            // line 38
             yield "                </div>
             ";
         } else {
-            // line 44
+            // line 40
             yield "                <p>Aucun post disponible.</p>
             ";
         }
-        // line 46
+        // line 42
         yield "        </section>
     </div>
 ";
@@ -199,7 +189,7 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  169 => 46,  165 => 44,  161 => 42,  150 => 37,  145 => 34,  141 => 32,  135 => 30,  133 => 29,  126 => 25,  122 => 23,  118 => 22,  115 => 21,  113 => 20,  107 => 16,  101 => 14,  99 => 13,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
+        return array (  159 => 42,  155 => 40,  151 => 38,  140 => 33,  133 => 29,  126 => 25,  122 => 23,  118 => 22,  115 => 21,  113 => 20,  107 => 16,  101 => 14,  99 => 13,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -232,11 +222,7 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                             </div>
                             <div class=\"post-author\">
                                 <strong>
-                                    {% if post.user is not null %}
-                                        {{ post.user.username }}
-                                    {% else %}
-                                        Utilisateur inconnu
-                                    {% endif %}
+                                    {{ post.getUserName() }}
                                 </strong>
                             </div>
                             <div class=\"post-date\">
