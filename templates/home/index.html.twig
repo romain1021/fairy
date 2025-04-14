@@ -9,6 +9,12 @@
         <h1>Accueil</h1>
         <p>Bienvenue sur notre site Symfony&nbsp;!</p>
 
+        {% if app.user is not null %}
+            <p>Votre ID utilisateur est : {{ app.user.id }}</p>
+            <a href="{{ path('new_post') }}" class="btn btn-primary">Nouveau Post</a>
+            <a href="{{ path(logout_route) }}" class="btn btn-danger">Se déconnecter</a>
+        {% endif %}
+
         <section class="posts-section">
             <h2>Posts</h2>
             {% if posts is not empty %}
@@ -18,10 +24,14 @@
                             <div class="post-content">
                                 {{ post.content }}
                             </div>
+                            <div class="post-author">
+                                <strong>{{ post.user.username }}</strong>
+                            </div>
                             <div class="post-date">
                                 {{ post.createdAt|date('d/m/Y H:i') }}
                             </div>
                         </div>
+                        <hr> <!-- Séparation entre les posts -->
                     {% endfor %}
                 </div>
             {% else %}
