@@ -89,42 +89,54 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 8
-        yield "    <h1>Accueil</h1>
-    <p>Bienvenue sur notre site Symfony !</p>
+        yield "    <div class=\"home\">
+        <h1>Accueil</h1>
+        <p>Bienvenue sur notre site Symfony&nbsp;!</p>
 
-    <h2>Posts</h2>
-    ";
-        // line 12
-        if ( !Twig\Extension\CoreExtension::testEmpty((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 12, $this->source); })()))) {
-            // line 13
-            yield "        <ul>
+        <section class=\"posts-section\">
+            <h2>Posts</h2>
             ";
-            // line 14
-            $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 14, $this->source); })()));
-            foreach ($context['_seq'] as $context["_key"] => $context["post"]) {
-                // line 15
-                yield "                <li>
+        // line 14
+        if ( !Twig\Extension\CoreExtension::testEmpty((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 14, $this->source); })()))) {
+            // line 15
+            yield "                <div class=\"posts-grid\">
                     ";
-                // line 16
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "content", [], "any", false, false, false, 16), "html", null, true);
-                yield " (";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 16), "d/m/Y H:i"), "html", null, true);
-                yield ")
-                </li>
-            ";
+            // line 16
+            $context['_parent'] = $context;
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 16, $this->source); })()));
+            foreach ($context['_seq'] as $context["_key"] => $context["post"]) {
+                // line 17
+                yield "                        <div class=\"post-tile\">
+                            <div class=\"post-content\">
+                                ";
+                // line 19
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "content", [], "any", false, false, false, 19), "html", null, true);
+                yield "
+                            </div>
+                            <div class=\"post-date\">
+                                ";
+                // line 22
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 22), "d/m/Y H:i"), "html", null, true);
+                yield "
+                            </div>
+                        </div>
+                    ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 19
-            yield "        </ul>
-    ";
+            // line 26
+            yield "                </div>
+            ";
         } else {
-            // line 21
-            yield "        <p>Aucun post disponible.</p>
-    ";
+            // line 28
+            yield "                <p>Aucun post disponible.</p>
+            ";
         }
+        // line 30
+        yield "        </section>
+    </div>
+";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -155,7 +167,7 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  125 => 21,  121 => 19,  110 => 16,  107 => 15,  103 => 14,  100 => 13,  98 => 12,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
+        return array (  137 => 30,  133 => 28,  129 => 26,  119 => 22,  113 => 19,  109 => 17,  105 => 16,  102 => 15,  100 => 14,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -167,21 +179,30 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
 {% endblock %}
 
 {% block body %}
-    <h1>Accueil</h1>
-    <p>Bienvenue sur notre site Symfony !</p>
+    <div class=\"home\">
+        <h1>Accueil</h1>
+        <p>Bienvenue sur notre site Symfony&nbsp;!</p>
 
-    <h2>Posts</h2>
-    {% if posts is not empty %}
-        <ul>
-            {% for post in posts %}
-                <li>
-                    {{ post.content }} ({{ post.createdAt|date('d/m/Y H:i') }})
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Aucun post disponible.</p>
-    {% endif %}
+        <section class=\"posts-section\">
+            <h2>Posts</h2>
+            {% if posts is not empty %}
+                <div class=\"posts-grid\">
+                    {% for post in posts %}
+                        <div class=\"post-tile\">
+                            <div class=\"post-content\">
+                                {{ post.content }}
+                            </div>
+                            <div class=\"post-date\">
+                                {{ post.createdAt|date('d/m/Y H:i') }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Aucun post disponible.</p>
+            {% endif %}
+        </section>
+    </div>
 {% endblock %}", "home/index.html.twig", "/Users/romain/www/fairy/templates/home/index.html.twig");
     }
 }

@@ -5,19 +5,28 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Accueil</h1>
-    <p>Bienvenue sur notre site Symfony !</p>
+    <div class="home">
+        <h1>Accueil</h1>
+        <p>Bienvenue sur notre site Symfony&nbsp;!</p>
 
-    <h2>Posts</h2>
-    {% if posts is not empty %}
-        <ul>
-            {% for post in posts %}
-                <li>
-                    {{ post.content }} ({{ post.createdAt|date('d/m/Y H:i') }})
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Aucun post disponible.</p>
-    {% endif %}
+        <section class="posts-section">
+            <h2>Posts</h2>
+            {% if posts is not empty %}
+                <div class="posts-grid">
+                    {% for post in posts %}
+                        <div class="post-tile">
+                            <div class="post-content">
+                                {{ post.content }}
+                            </div>
+                            <div class="post-date">
+                                {{ post.createdAt|date('d/m/Y H:i') }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Aucun post disponible.</p>
+            {% endif %}
+        </section>
+    </div>
 {% endblock %}
