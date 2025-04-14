@@ -91,27 +91,21 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
         // line 8
         yield "    <div class=\"home\">
         <h1>Accueil</h1>
-        <p>Bienvenue sur notre site Symfony&nbsp;!</p>
-
-        ";
-        // line 12
-        if ( !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 12, $this->source); })()), "user", [], "any", false, false, false, 12))) {
-            // line 13
-            yield "            <p>Votre ID utilisateur est : ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 13, $this->source); })()), "user", [], "any", false, false, false, 13), "id", [], "any", false, false, false, 13), "html", null, true);
-            yield "</p>
-            <a href=\"";
+            <!-- Affichage des informations de session -->
+            <div class=\"session-info\">
+                <h3>Informations de session</h3>
+                ";
+        // line 13
+        if ( !Twig\Extension\CoreExtension::testEmpty((isset($context["username"]) || array_key_exists("username", $context) ? $context["username"] : (function () { throw new RuntimeError('Variable "username" does not exist.', 13, $this->source); })()))) {
             // line 14
-            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("new_post");
-            yield "\" class=\"btn btn-primary\">Nouveau Post</a>
-            <a href=\"";
-            // line 15
-            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath((isset($context["logout_route"]) || array_key_exists("logout_route", $context) ? $context["logout_route"] : (function () { throw new RuntimeError('Variable "logout_route" does not exist.', 15, $this->source); })()));
-            yield "\" class=\"btn btn-danger\">Se déconnecter</a>
-        ";
+            yield "                    <p>Nom d'utilisateur : ";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["username"]) || array_key_exists("username", $context) ? $context["username"] : (function () { throw new RuntimeError('Variable "username" does not exist.', 14, $this->source); })()), "html", null, true);
+            yield "</p>
+                ";
         }
-        // line 17
-        yield "
+        // line 16
+        yield "            </div>
+
         <section class=\"posts-section\">
             <h2>Posts</h2>
             ";
@@ -133,15 +127,27 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                 yield "
                             </div>
                             <div class=\"post-author\">
-                                <strong>";
-                // line 28
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["post"], "user", [], "any", false, false, false, 28), "username", [], "any", false, false, false, 28), "html", null, true);
-                yield "</strong>
+                                <strong>
+                                    ";
+                // line 29
+                if ( !(null === CoreExtension::getAttribute($this->env, $this->source, $context["post"], "user", [], "any", false, false, false, 29))) {
+                    // line 30
+                    yield "                                        ";
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["post"], "user", [], "any", false, false, false, 30), "username", [], "any", false, false, false, 30), "html", null, true);
+                    yield "
+                                    ";
+                } else {
+                    // line 32
+                    yield "                                        Utilisateur inconnu
+                                    ";
+                }
+                // line 34
+                yield "                                </strong>
                             </div>
                             <div class=\"post-date\">
                                 ";
-                // line 31
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 31), "d/m/Y H:i"), "html", null, true);
+                // line 37
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 37), "d/m/Y H:i"), "html", null, true);
                 yield "
                             </div>
                         </div>
@@ -151,15 +157,15 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 36
+            // line 42
             yield "                </div>
             ";
         } else {
-            // line 38
+            // line 44
             yield "                <p>Aucun post disponible.</p>
             ";
         }
-        // line 40
+        // line 46
         yield "        </section>
     </div>
 ";
@@ -193,7 +199,7 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  163 => 40,  159 => 38,  155 => 36,  144 => 31,  138 => 28,  132 => 25,  128 => 23,  124 => 22,  121 => 21,  119 => 20,  114 => 17,  109 => 15,  105 => 14,  100 => 13,  98 => 12,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
+        return array (  169 => 46,  165 => 44,  161 => 42,  150 => 37,  145 => 34,  141 => 32,  135 => 30,  133 => 29,  126 => 25,  122 => 23,  118 => 22,  115 => 21,  113 => 20,  107 => 16,  101 => 14,  99 => 13,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -207,13 +213,13 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
 {% block body %}
     <div class=\"home\">
         <h1>Accueil</h1>
-        <p>Bienvenue sur notre site Symfony&nbsp;!</p>
-
-        {% if app.user is not null %}
-            <p>Votre ID utilisateur est : {{ app.user.id }}</p>
-            <a href=\"{{ path('new_post') }}\" class=\"btn btn-primary\">Nouveau Post</a>
-            <a href=\"{{ path(logout_route) }}\" class=\"btn btn-danger\">Se déconnecter</a>
-        {% endif %}
+            <!-- Affichage des informations de session -->
+            <div class=\"session-info\">
+                <h3>Informations de session</h3>
+                {% if username is not empty %}
+                    <p>Nom d'utilisateur : {{ username }}</p>
+                {% endif %}
+            </div>
 
         <section class=\"posts-section\">
             <h2>Posts</h2>
@@ -225,7 +231,13 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                                 {{ post.content }}
                             </div>
                             <div class=\"post-author\">
-                                <strong>{{ post.user.username }}</strong>
+                                <strong>
+                                    {% if post.user is not null %}
+                                        {{ post.user.username }}
+                                    {% else %}
+                                        Utilisateur inconnu
+                                    {% endif %}
+                                </strong>
                             </div>
                             <div class=\"post-date\">
                                 {{ post.createdAt|date('d/m/Y H:i') }}

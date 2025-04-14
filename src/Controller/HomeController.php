@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\PostRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Entity\User;
 
 class HomeController extends AbstractController
 {
@@ -22,9 +23,21 @@ class HomeController extends AbstractController
         // Récupérer les posts triés par date de création décroissante
         $posts = $postRepository->findBy([], ['createdAt' => 'DESC']);
 
+        // Ajouter une propriété temporaire pour afficher le nom de l'utilisateur
+        foreach ($posts as $post) {
+            $userId = $post->getUser()?->getId();
+            if ($userId) {
+                $user = User::getUserById($this->getDoctrine()->getManager(), $userId);
+                $post->username = $user ? $user->getUsername() : 'Utilisateur inconnu';
+            } else {
+                $post->username = 'Utilisateur inconnu';
+            }
+        }
+
         return $this->render('home/index.html.twig', [
-            'title' => 'Bienvenue sur ma homepage Symfony !',
+            'title' => 'fairy',
             'posts' => $posts,
+            'username' => $session->get('username'),
             'logout_route' => 'app_logout',
         ]);
     }

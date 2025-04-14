@@ -3,6 +3,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[ORM\Entity]
 #[ORM\Table(name: "users")]
@@ -143,5 +144,10 @@ class User implements UserInterface
     public function eraseCredentials(): void
     {
         // If storing any sensitive data temporarily, clear it here
+    }
+
+    public static function getUserById(EntityManagerInterface $entityManager, int $id): ?self
+    {
+        return $entityManager->getRepository(self::class)->find($id);
     }
 }

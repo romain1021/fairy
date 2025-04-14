@@ -18,17 +18,6 @@ class PostController extends AbstractController
         $user = $this->getUser();
         $session = $request->getSession();
 
-        if (!$user || !method_exists($user, 'getId')) {
-            if (!$session->has('user_id')) {
-                return $this->redirectToRoute('app_login');
-            }
-            $userId = $session->get('user_id');
-        } else {
-            $userId = $user->getId();
-            if (!$session->has('user_id') || $session->get('user_id') !== $userId) {
-                $session->set('user_id', $userId);
-            }
-        }
 
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
@@ -36,7 +25,7 @@ class PostController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setCreatedAt(new \DateTime());
-            $post->setUser($this->getUser());
+            $post->setUser($user); // Associe l'utilisateur connecté au post
             $entityManager->persist($post);
             $entityManager->flush();
 
@@ -46,5 +35,15 @@ class PostController extends AbstractController
         return $this->render('post/new.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/logout', name: 'app_logout')]
+    public function logout(Request $request): Response
+    {
+        $session = $request->getSession();
+        // Supprimer les données utilisateur de la session
+        $session->clear();
+
+        return $this->redirectToRoute('app_login');
     }
 }

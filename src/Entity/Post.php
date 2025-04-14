@@ -14,9 +14,6 @@ class Post
     #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $userId = null;
-
     #[ORM\Column(type: 'text')]
     private string $content;
 
@@ -46,13 +43,7 @@ class Post
 
     public function getUserId(): ?int
     {
-        return $this->userId;
-    }
-
-    public function setUserId(?int $userId): self
-    {
-        $this->userId = $userId;
-        return $this;
+        return $this->user?->getId();
     }
 
     public function getContent(): string
