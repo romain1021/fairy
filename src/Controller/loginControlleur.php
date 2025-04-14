@@ -15,9 +15,9 @@ class loginControlleur extends AbstractController
     #[Route('/login', name: 'app_login')]
     public function login(Request $request, SessionInterface $session, EntityManagerInterface $entityManager): Response
     {
-        // Vérifier si l'utilisateur est déjà connecté
         if ($session->get('username')) {
-            return $this->redirectToRoute('app_user_home');
+            // Redirige l'utilisateur connecté vers la page d'accueil
+            return $this->redirectToRoute('home');
         }
 
         $error = null;
@@ -26,14 +26,12 @@ class loginControlleur extends AbstractController
             $username = $request->request->get('username');
             $password = $request->request->get('password');
 
-            // Vérification des identifiants dans la base de données
             $user = $entityManager->getRepository(User::class)->findOneBy(['username' => $username]);
 
             if ($user && password_verify($password, $user->getPassword())) {
                 $session->set('username', $user->getUsername());
-                $session->set('email', $user->getEmail());
                 $session->set('user_id', $user->getId());
-                return $this->redirectToRoute('app_user_home');
+                return $this->redirectToRoute('home'); // Redirection corrigée
             } else {
                 $error = 'Identifiants incorrects.';
             }
@@ -58,9 +56,7 @@ class loginControlleur extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        return $this->render('user/home.html.twig', [
-            'username' => $session->get('username'),
-        ]);
+        return $this->redirectToRoute('home'); // Redirige vers /home
     }
 
     #[Route('/register', name: 'app_register')]

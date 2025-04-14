@@ -104,51 +104,62 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
             // line 14
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("new_post");
             yield "\" class=\"btn btn-primary\">Nouveau Post</a>
+            <a href=\"";
+            // line 15
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath((isset($context["logout_route"]) || array_key_exists("logout_route", $context) ? $context["logout_route"] : (function () { throw new RuntimeError('Variable "logout_route" does not exist.', 15, $this->source); })()));
+            yield "\" class=\"btn btn-danger\">Se déconnecter</a>
         ";
         }
-        // line 16
+        // line 17
         yield "
         <section class=\"posts-section\">
             <h2>Posts</h2>
             ";
-        // line 19
-        if ( !Twig\Extension\CoreExtension::testEmpty((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 19, $this->source); })()))) {
-            // line 20
+        // line 20
+        if ( !Twig\Extension\CoreExtension::testEmpty((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 20, $this->source); })()))) {
+            // line 21
             yield "                <div class=\"posts-grid\">
                     ";
-            // line 21
+            // line 22
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 21, $this->source); })()));
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 22, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["post"]) {
-                // line 22
+                // line 23
                 yield "                        <div class=\"post-tile\">
                             <div class=\"post-content\">
                                 ";
-                // line 24
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "content", [], "any", false, false, false, 24), "html", null, true);
+                // line 25
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "content", [], "any", false, false, false, 25), "html", null, true);
                 yield "
+                            </div>
+                            <div class=\"post-author\">
+                                <strong>";
+                // line 28
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["post"], "user", [], "any", false, false, false, 28), "username", [], "any", false, false, false, 28), "html", null, true);
+                yield "</strong>
                             </div>
                             <div class=\"post-date\">
                                 ";
-                // line 27
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 27), "d/m/Y H:i"), "html", null, true);
+                // line 31
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 31), "d/m/Y H:i"), "html", null, true);
                 yield "
                             </div>
                         </div>
+                        <hr> <!-- Séparation entre les posts -->
                     ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 31
+            // line 36
             yield "                </div>
             ";
         } else {
-            // line 33
+            // line 38
             yield "                <p>Aucun post disponible.</p>
             ";
         }
-        // line 35
+        // line 40
         yield "        </section>
     </div>
 ";
@@ -182,7 +193,7 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  152 => 35,  148 => 33,  144 => 31,  134 => 27,  128 => 24,  124 => 22,  120 => 21,  117 => 20,  115 => 19,  110 => 16,  105 => 14,  100 => 13,  98 => 12,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
+        return array (  163 => 40,  159 => 38,  155 => 36,  144 => 31,  138 => 28,  132 => 25,  128 => 23,  124 => 22,  121 => 21,  119 => 20,  114 => 17,  109 => 15,  105 => 14,  100 => 13,  98 => 12,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -201,6 +212,7 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
         {% if app.user is not null %}
             <p>Votre ID utilisateur est : {{ app.user.id }}</p>
             <a href=\"{{ path('new_post') }}\" class=\"btn btn-primary\">Nouveau Post</a>
+            <a href=\"{{ path(logout_route) }}\" class=\"btn btn-danger\">Se déconnecter</a>
         {% endif %}
 
         <section class=\"posts-section\">
@@ -212,10 +224,14 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                             <div class=\"post-content\">
                                 {{ post.content }}
                             </div>
+                            <div class=\"post-author\">
+                                <strong>{{ post.user.username }}</strong>
+                            </div>
                             <div class=\"post-date\">
                                 {{ post.createdAt|date('d/m/Y H:i') }}
                             </div>
                         </div>
+                        <hr> <!-- Séparation entre les posts -->
                     {% endfor %}
                 </div>
             {% else %}
