@@ -9,3 +9,7 @@ login_redirect:
     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
     defaults:
         route: login
+
+new_post:
+    path: /post/new
+    controller: App\Controller\PostController::new

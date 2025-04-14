@@ -93,30 +93,45 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
         <h1>Accueil</h1>
         <p>Bienvenue sur notre site Symfony&nbsp;!</p>
 
+        ";
+        // line 12
+        if ( !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 12, $this->source); })()), "user", [], "any", false, false, false, 12))) {
+            // line 13
+            yield "            <p>Votre ID utilisateur est : ";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 13, $this->source); })()), "user", [], "any", false, false, false, 13), "id", [], "any", false, false, false, 13), "html", null, true);
+            yield "</p>
+            <a href=\"";
+            // line 14
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("new_post");
+            yield "\" class=\"btn btn-primary\">Nouveau Post</a>
+        ";
+        }
+        // line 16
+        yield "
         <section class=\"posts-section\">
             <h2>Posts</h2>
             ";
-        // line 14
-        if ( !Twig\Extension\CoreExtension::testEmpty((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 14, $this->source); })()))) {
-            // line 15
+        // line 19
+        if ( !Twig\Extension\CoreExtension::testEmpty((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 19, $this->source); })()))) {
+            // line 20
             yield "                <div class=\"posts-grid\">
                     ";
-            // line 16
+            // line 21
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 16, $this->source); })()));
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 21, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["post"]) {
-                // line 17
+                // line 22
                 yield "                        <div class=\"post-tile\">
                             <div class=\"post-content\">
                                 ";
-                // line 19
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "content", [], "any", false, false, false, 19), "html", null, true);
+                // line 24
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "content", [], "any", false, false, false, 24), "html", null, true);
                 yield "
                             </div>
                             <div class=\"post-date\">
                                 ";
-                // line 22
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 22), "d/m/Y H:i"), "html", null, true);
+                // line 27
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 27), "d/m/Y H:i"), "html", null, true);
                 yield "
                             </div>
                         </div>
@@ -125,15 +140,15 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 26
+            // line 31
             yield "                </div>
             ";
         } else {
-            // line 28
+            // line 33
             yield "                <p>Aucun post disponible.</p>
             ";
         }
-        // line 30
+        // line 35
         yield "        </section>
     </div>
 ";
@@ -167,7 +182,7 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  137 => 30,  133 => 28,  129 => 26,  119 => 22,  113 => 19,  109 => 17,  105 => 16,  102 => 15,  100 => 14,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
+        return array (  152 => 35,  148 => 33,  144 => 31,  134 => 27,  128 => 24,  124 => 22,  120 => 21,  117 => 20,  115 => 19,  110 => 16,  105 => 14,  100 => 13,  98 => 12,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -182,6 +197,11 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
     <div class=\"home\">
         <h1>Accueil</h1>
         <p>Bienvenue sur notre site Symfony&nbsp;!</p>
+
+        {% if app.user is not null %}
+            <p>Votre ID utilisateur est : {{ app.user.id }}</p>
+            <a href=\"{{ path('new_post') }}\" class=\"btn btn-primary\">Nouveau Post</a>
+        {% endif %}
 
         <section class=\"posts-section\">
             <h2>Posts</h2>

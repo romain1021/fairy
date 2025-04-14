@@ -5,6 +5,7 @@
 return [
     'home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
     'app_home' => [[], ['_controller' => 'App\\Controller\\HomeController::indexPosts'], [], [['text', '/home']], [], [], []],
+    'post' => [[], ['_controller' => 'App\\Controller\\PostController::new'], [], [['text', '/post']], [], [], []],
     'app_login' => [[], ['_controller' => 'App\\Controller\\loginControlleur::login'], [], [['text', '/login']], [], [], []],
     'app_logout' => [[], ['_controller' => 'App\\Controller\\loginControlleur::logout'], [], [['text', '/logout']], [], [], []],
     'app_user_home' => [[], ['_controller' => 'App\\Controller\\loginControlleur::userHome'], [], [['text', '/user/home']], [], [], []],
@@ -23,4 +24,5 @@ return [
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     'login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/login']], [], [], []],
     'login_redirect' => [[], ['route' => 'login', '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController'], [], [['text', '/']], [], [], []],
+    'new_post' => [[], ['_controller' => 'App\\Controller\\PostController::new'], [], [['text', '/post/new']], [], [], []],
 ];
