@@ -345,6 +345,13 @@
         <argument type="service" id=".service_locator.mx0UMmY.App\Controller\PostController"/>
       </call>
     </service>
+    <service id="App\Controller\UserController" class="App\Controller\UserController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.mx0UMmY.App\Controller\UserController"/>
+      </call>
+    </service>
     <service id="App\Controller\UserHomeController" class="App\Controller\UserHomeController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -6202,6 +6209,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\PostController" class="App\Controller\PostController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\PostController" class="App\Controller\PostController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\PostController" class="App\Controller\PostController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\UserController" class="App\Controller\UserController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\UserController" class="App\Controller\UserController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\UserController" class="App\Controller\UserController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\UserHomeController" class="App\Controller\UserHomeController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\UserHomeController" class="App\Controller\UserHomeController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\UserHomeController" class="App\Controller\UserHomeController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6560,13 +6570,14 @@
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
-    <service id=".service_locator.yO_jJtE" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.ATbDDGo" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\HomeController::index" type="service_closure" id=".service_locator.fcP3Ord"/>
         <argument key="App\Controller\HomeController::indexPosts" type="service_closure" id=".service_locator.Xf_chUG"/>
         <argument key="App\Controller\PostController::like" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\PostController::new" type="service_closure" id=".service_locator.aKM6MDa"/>
+        <argument key="App\Controller\UserController::followUser" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\UserProfileController::index" type="service_closure" id=".service_locator.fcP3Ord"/>
         <argument key="App\Controller\loginControlleur::login" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\loginControlleur::register" type="service_closure" id=".service_locator.aKM6MDa"/>
@@ -6578,6 +6589,7 @@
         <argument key="App\Controller\HomeController:indexPosts" type="service_closure" id=".service_locator.Xf_chUG"/>
         <argument key="App\Controller\PostController:like" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\PostController:new" type="service_closure" id=".service_locator.aKM6MDa"/>
+        <argument key="App\Controller\UserController:followUser" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\UserProfileController:index" type="service_closure" id=".service_locator.fcP3Ord"/>
         <argument key="App\Controller\loginControlleur:login" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\loginControlleur:register" type="service_closure" id=".service_locator.aKM6MDa"/>
@@ -7036,6 +7048,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.mx0UMmY" method="withContext"/>
     </service>
+    <service id=".service_locator.mx0UMmY.App\Controller\UserController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\UserController"/>
+      <argument>App\Controller\UserController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.mx0UMmY" method="withContext"/>
+    </service>
     <service id=".service_locator.mx0UMmY.App\Controller\UserHomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\UserHomeController"/>
       <argument>App\Controller\UserHomeController</argument>
@@ -7225,12 +7243,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.yO_jJtE"/>
+      <argument type="service" id=".service_locator.ATbDDGo"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.yO_jJtE"/>
+      <argument type="service" id=".service_locator.ATbDDGo"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8183,7 +8201,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.yO_jJtE"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.ATbDDGo"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8208,7 +8226,7 @@
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.TptAwv6" alias=".service_locator.fcP3Ord"/>
-    <service id=".service_locator.Bnf2Mak" alias=".service_locator.yO_jJtE"/>
+    <service id=".service_locator.8.DjaVc" alias=".service_locator.ATbDDGo"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.02UTmgK" alias=".service_locator.YUolH8_"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>

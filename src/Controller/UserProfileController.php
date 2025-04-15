@@ -22,9 +22,19 @@ class UserProfileController extends AbstractController
 
         $posts = $postRepository->findBy(['userId' => $id], ['createdAt' => 'DESC']);
 
+        $isFollowing = false;
+        if ($this->getUser()) {
+            $connection = $entityManager->getConnection();
+            $query = 'SELECT * FROM followers WHERE follower_id = :followerId AND followed_id = :followedId';
+            $stmt = $connection->prepare($query);
+            $stmt->execute(['followerId' => $this->getUser()->getId(), 'followedId' => $id]);
+            $isFollowing = (bool) $stmt->fetch();
+        }
+
         return $this->render('user/profile.html.twig', [
             'user' => $user,
             'posts' => $posts,
+            'isFollowing' => $isFollowing,
         ]);
     }
 }

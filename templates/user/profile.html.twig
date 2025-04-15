@@ -7,11 +7,15 @@
 {% block body %}
     <div class="user-profile">
         <h1>Profil de {{ user.username }}</h1>
+            <button id="follow-button" data-user-id="{{ user.id }}">
+                {{ isFollowing ? 'Se désabonner' : 'S\'abonner' }}
+            </button>
+
         <p><strong>Bio :</strong> {{ user.bio ? user.bio : 'Aucune bio disponible.' }}</p>
 
         <section class="user-posts">
             <h2>Posts publiés</h2>
-            {% if posts is not empty %}
+            {% if posts|length > 0 %}
                 <div class="posts-grid">
                     {% for post in posts %}
                         <div class="post-tile">
@@ -30,4 +34,15 @@
             {% endif %}
         </section>
     </div>
+    <script>
+        document.getElementById('follow-button')?.addEventListener('click', () => {
+            const userId = document.getElementById('follow-button').dataset.userId;
+            fetch(`/user/${userId}/follow`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('follow-button').textContent = data.isFollowing ? 'Se désabonner' : 'S\'abonner';
+                });
+        });
+    </script>
 {% endblock %}
+
