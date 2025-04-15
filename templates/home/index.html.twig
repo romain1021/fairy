@@ -62,6 +62,12 @@
                                             <div class="repost-date">
                                                 Publié le : {{ repost.createdAt|date('d/m/Y H:i') }}
                                             </div>
+                                            <div class="repost-actions">
+                                                <form action="{{ path('post_repost', { id: repost.id }) }}" method="POST">
+                                                    <textarea name="comment" placeholder="Ajoutez un commentaire..."></textarea>
+                                                    <button type="submit">Reposter</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     {% endfor %}
                                 </div>

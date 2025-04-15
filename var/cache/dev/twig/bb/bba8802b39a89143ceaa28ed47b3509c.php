@@ -52,21 +52,25 @@ class __TwigTemplate_ffe502fbb3bec23fd9ec8dd0e7ce4b5d extends Template
         // line 6
         yield from $this->unwrap()->yieldBlock('title', $context, $blocks);
         yield "</title>
+    <link rel=\"stylesheet\" href=\"";
+        // line 7
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/style.css"), "html", null, true);
+        yield "\">
 </head>
 <body>
     <header>
         <nav>
             <a href=\"";
-        // line 11
+        // line 12
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("home");
         yield "\">Accueil</a>
         </nav>
     </header>
     <main>
         ";
-        // line 15
-        yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
         // line 16
+        yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
+        // line 17
         yield "    </main>
 </body>
 </html>";
@@ -99,7 +103,7 @@ class __TwigTemplate_ffe502fbb3bec23fd9ec8dd0e7ce4b5d extends Template
         return; yield '';
     }
 
-    // line 15
+    // line 16
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -139,7 +143,7 @@ class __TwigTemplate_ffe502fbb3bec23fd9ec8dd0e7ce4b5d extends Template
      */
     public function getDebugInfo()
     {
-        return array (  103 => 15,  83 => 6,  70 => 16,  68 => 15,  61 => 11,  53 => 6,  46 => 1,);
+        return array (  107 => 16,  87 => 6,  74 => 17,  72 => 16,  65 => 12,  57 => 7,  53 => 6,  46 => 1,);
     }
 
     public function getSourceContext()
@@ -150,6 +154,7 @@ class __TwigTemplate_ffe502fbb3bec23fd9ec8dd0e7ce4b5d extends Template
     <meta charset=\"UTF-8\">
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
     <title>{% block title %}Mon site Symfony{% endblock %}</title>
+    <link rel=\"stylesheet\" href=\"{{ asset('css/style.css') }}\">
 </head>
 <body>
     <header>

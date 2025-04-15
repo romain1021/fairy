@@ -202,17 +202,26 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "createdAt", [], "any", false, false, false, 63), "d/m/Y H:i"), "html", null, true);
                         yield "
                                             </div>
+                                            <div class=\"repost-actions\">
+                                                <form action=\"";
+                        // line 66
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("post_repost", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "id", [], "any", false, false, false, 66)]), "html", null, true);
+                        yield "\" method=\"POST\">
+                                                    <textarea name=\"comment\" placeholder=\"Ajoutez un commentaire...\"></textarea>
+                                                    <button type=\"submit\">Reposter</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     ";
                     }
                     $_parent = $context['_parent'];
                     unset($context['_seq'], $context['_iterated'], $context['_key'], $context['repost'], $context['_parent'], $context['loop']);
                     $context = array_intersect_key($context, $_parent) + $_parent;
-                    // line 67
+                    // line 73
                     yield "                                </div>
                             ";
                 }
-                // line 69
+                // line 75
                 yield "                        </div>
                         <hr> <!-- Séparation entre les posts -->
                     ";
@@ -220,15 +229,15 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 72
+            // line 78
             yield "                </div>
             ";
         } else {
-            // line 74
+            // line 80
             yield "                <p>Aucun post disponible.</p>
             ";
         }
-        // line 76
+        // line 82
         yield "        </section>
     </div>
     <script>
@@ -274,7 +283,7 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  232 => 76,  228 => 74,  224 => 72,  216 => 69,  212 => 67,  202 => 63,  194 => 58,  190 => 57,  183 => 53,  179 => 51,  175 => 50,  171 => 48,  169 => 47,  161 => 42,  155 => 39,  147 => 34,  143 => 33,  136 => 29,  132 => 28,  126 => 25,  122 => 23,  118 => 22,  115 => 21,  113 => 20,  107 => 16,  101 => 14,  99 => 13,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
+        return array (  241 => 82,  237 => 80,  233 => 78,  225 => 75,  221 => 73,  208 => 66,  202 => 63,  194 => 58,  190 => 57,  183 => 53,  179 => 51,  175 => 50,  171 => 48,  169 => 47,  161 => 42,  155 => 39,  147 => 34,  143 => 33,  136 => 29,  132 => 28,  126 => 25,  122 => 23,  118 => 22,  115 => 21,  113 => 20,  107 => 16,  101 => 14,  99 => 13,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -342,6 +351,12 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                                             </div>
                                             <div class=\"repost-date\">
                                                 Publié le : {{ repost.createdAt|date('d/m/Y H:i') }}
+                                            </div>
+                                            <div class=\"repost-actions\">
+                                                <form action=\"{{ path('post_repost', { id: repost.id }) }}\" method=\"POST\">
+                                                    <textarea name=\"comment\" placeholder=\"Ajoutez un commentaire...\"></textarea>
+                                                    <button type=\"submit\">Reposter</button>
+                                                </form>
                                             </div>
                                         </div>
                                     {% endfor %}
