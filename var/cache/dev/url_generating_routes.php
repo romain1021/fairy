@@ -6,7 +6,6 @@ return [
     'home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
     'app_home' => [[], ['_controller' => 'App\\Controller\\HomeController::indexPosts'], [], [['text', '/home']], [], [], []],
     'post' => [[], ['_controller' => 'App\\Controller\\PostController::new'], [], [['text', '/post']], [], [], []],
-    'user_follow' => [['id'], ['_controller' => 'App\\Controller\\UserController::followUser'], [], [['text', '/follow'], ['variable', '/', '[^/]++', 'id', true], ['text', '/user']], [], [], []],
     'app_login' => [[], ['_controller' => 'App\\Controller\\loginControlleur::login'], [], [['text', '/login']], [], [], []],
     'app_logout' => [[], ['_controller' => 'App\\Controller\\loginControlleur::logout'], [], [['text', '/logout']], [], [], []],
     'app_user_home' => [[], ['_controller' => 'App\\Controller\\loginControlleur::userHome'], [], [['text', '/user/home']], [], [], []],
@@ -28,4 +27,5 @@ return [
     'new_post' => [[], ['_controller' => 'App\\Controller\\PostController::new'], [], [['text', '/post/new']], [], [], []],
     'post_like' => [['id'], ['_controller' => 'App\\Controller\\PostController::like'], [], [['text', '/like'], ['variable', '/', '[^/]++', 'id', true], ['text', '/post']], [], [], []],
     'user_profile' => [['id'], ['_controller' => 'App\\Controller\\UserProfileController::index'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/user/profile']], [], [], []],
+    'user_follow' => [['id'], ['_controller' => 'App\\Controller\\UserController::followUser'], [], [['text', '/follow'], ['variable', '/', '[^/]++', 'id', true], ['text', '/user']], [], [], []],
 ];

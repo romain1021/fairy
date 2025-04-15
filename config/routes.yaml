@@ -22,3 +22,8 @@ post_like:
 user_profile:
     path: /user/profile/{id}
     controller: App\Controller\UserProfileController::index
+
+user_follow:
+    path: /user/{id}/follow
+    controller: App\Controller\UserController::followUser
+    methods: POST

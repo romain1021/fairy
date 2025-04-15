@@ -5359,9 +5359,16 @@
     </service>
     <service id="security.access_map" class="Symfony\Component\Security\Http\AccessMap">
       <call method="add">
+        <argument type="service" id=".security.request_matcher.DxEhmg8"/>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_FULLY</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
         <argument type="service" id=".security.request_matcher.Pn7yvdV"/>
         <argument type="collection">
-          <argument>ROLE_USER</argument>
+          <argument>PUBLIC_ACCESS</argument>
         </argument>
         <argument>null</argument>
       </call>
@@ -5931,6 +5938,9 @@
         <argument key="security.firewall.map.context.dev" type="service_closure" id="security.firewall.map.context.dev"/>
         <argument key="security.firewall.map.context.main" type="service_closure" id="security.firewall.map.context.main"/>
       </argument>
+    </service>
+    <service id=".security.request_matcher.DxEhmg8" class="Symfony\Component\HttpFoundation\RequestMatcher">
+      <argument>^/user/\d+/follow</argument>
     </service>
     <service id=".security.request_matcher.Pn7yvdV" class="Symfony\Component\HttpFoundation\RequestMatcher">
       <argument>^/profile</argument>

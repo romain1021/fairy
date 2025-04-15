@@ -17,30 +17,47 @@ class UserController extends AbstractController
     {
         $currentUser = $this->getUser();
         if (!$currentUser) {
+            $this->get('logger')->error('Utilisateur non authentifié.');
             return new JsonResponse(['error' => 'Unauthorized'], 401);
         }
 
         $connection = $entityManager->getConnection();
-        $followerId = $currentUser->getId();
 
         // Vérifier si la relation existe déjà
-        $query = 'SELECT * FROM followers WHERE follower_id = :followerId AND followed_id = :followedId';
-        $stmt = $connection->prepare($query);
-        $stmt->execute(['followerId' => $followerId, 'followedId' => $id]);
-        $existingFollow = $stmt->fetch();
+        $exists = $connection->fetchOne(
+            'SELECT 1 FROM followers WHERE follower_id = :followerId AND followed_id = :followedId',
+            [
+                'followerId' => $currentUser->getId(),
+                'followedId' => $id,
+            ]
+        );
 
-        if ($existingFollow) {
-            // Supprimer la relation existante
-            $deleteQuery = 'DELETE FROM followers WHERE follower_id = :followerId AND followed_id = :followedId';
-            $connection->executeStatement($deleteQuery, ['followerId' => $followerId, 'followedId' => $id]);
-            $isFollowing = false;
-        } else {
-            // Ajouter une nouvelle relation
-            $insertQuery = 'INSERT INTO followers (follower_id, followed_id) VALUES (:followerId, :followedId)';
-            $connection->executeStatement($insertQuery, ['followerId' => $followerId, 'followedId' => $id]);
-            $isFollowing = true;
+        if ($exists) {
+            $this->get('logger')->info('Relation déjà existante.', [
+                'followerId' => $currentUser->getId(),
+                'followedId' => $id,
+            ]);
+            return new JsonResponse(['error' => 'Already following'], 400);
         }
 
-        return new JsonResponse(['isFollowing' => $isFollowing]);
+        // Ajouter une nouvelle relation dans la base de données
+        try {
+            $query = 'INSERT INTO followers (follower_id, followed_id) VALUES (:followerId, :followedId)';
+            $connection->executeStatement($query, [
+                'followerId' => $currentUser->getId(),
+                'followedId' => $id,
+            ]);
+            $this->get('logger')->info('Relation ajoutée avec succès.', [
+                'followerId' => $currentUser->getId(),
+                'followedId' => $id,
+            ]);
+        } catch (\Exception $e) {
+            $this->get('logger')->error('Erreur lors de l\'ajout de la relation.', [
+                'error' => $e->getMessage(),
+            ]);
+            return new JsonResponse(['error' => 'Database error'], 500);
+        }
+
+        return new JsonResponse(['success' => true]);
     }
 }

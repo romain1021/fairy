@@ -99,42 +99,36 @@ class __TwigTemplate_284916feeafddd3c38ddcc8a2c3ff0ab extends Template
             <button id=\"follow-button\" data-user-id=\"";
         // line 10
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 10, $this->source); })()), "id", [], "any", false, false, false, 10), "html", null, true);
-        yield "\">
-                ";
-        // line 11
-        yield (((isset($context["isFollowing"]) || array_key_exists("isFollowing", $context) ? $context["isFollowing"] : (function () { throw new RuntimeError('Variable "isFollowing" does not exist.', 11, $this->source); })())) ? ("Se désabonner") : ("S'abonner"));
-        yield "
-            </button>
-
+        yield "\">Suivre</button>
         <p><strong>Bio :</strong> ";
-        // line 14
-        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 14, $this->source); })()), "bio", [], "any", false, false, false, 14)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 14, $this->source); })()), "bio", [], "any", false, false, false, 14), "html", null, true)) : (yield "Aucune bio disponible."));
+        // line 11
+        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 11, $this->source); })()), "bio", [], "any", false, false, false, 11)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 11, $this->source); })()), "bio", [], "any", false, false, false, 11), "html", null, true)) : (yield "Aucune bio disponible."));
         yield "</p>
 
         <section class=\"user-posts\">
             <h2>Posts publiés</h2>
             ";
-        // line 18
-        if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 18, $this->source); })())) > 0)) {
-            // line 19
+        // line 15
+        if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 15, $this->source); })())) > 0)) {
+            // line 16
             yield "                <div class=\"posts-grid\">
                     ";
-            // line 20
+            // line 17
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 20, $this->source); })()));
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 17, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["post"]) {
-                // line 21
+                // line 18
                 yield "                        <div class=\"post-tile\">
                             <div class=\"post-content\">
                                 ";
-                // line 23
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "content", [], "any", false, false, false, 23), "html", null, true);
+                // line 20
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "content", [], "any", false, false, false, 20), "html", null, true);
                 yield "
                             </div>
                             <div class=\"post-date\">
                                 Publié le : ";
-                // line 26
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 26), "d/m/Y H:i"), "html", null, true);
+                // line 23
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 23), "d/m/Y H:i"), "html", null, true);
                 yield "
                             </div>
                         </div>
@@ -144,25 +138,40 @@ class __TwigTemplate_284916feeafddd3c38ddcc8a2c3ff0ab extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 31
+            // line 28
             yield "                </div>
             ";
         } else {
-            // line 33
+            // line 30
             yield "                <p>Aucun post publié.</p>
             ";
         }
-        // line 35
+        // line 32
         yield "        </section>
     </div>
     <script>
-        document.getElementById('follow-button')?.addEventListener('click', () => {
-            const userId = document.getElementById('follow-button').dataset.userId;
-            fetch(`/user/\${userId}/follow`, { method: 'POST' })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('follow-button').textContent = data.isFollowing ? 'Se désabonner' : 'S\\'abonner';
+        document.getElementById('follow-button').addEventListener('click', async function () {
+            const userId = this.getAttribute('data-user-id');
+            try {
+                const response = await fetch(`/user/\${userId}/follow`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    credentials: 'same-origin', // Inclut les cookies pour l'authentification
                 });
+
+                if (response.ok) {
+                    alert('Utilisateur suivi avec succès.');
+                } else {
+                    const errorData = await response.json();
+                    alert(`Erreur : \${errorData.error || 'Une erreur est survenue.'}`);
+                }
+            } catch (error) {
+                console.error('Erreur lors de la requête :', error);
+                alert('Impossible de suivre cet utilisateur.');
+            }
         });
     </script>
 ";
@@ -196,7 +205,7 @@ class __TwigTemplate_284916feeafddd3c38ddcc8a2c3ff0ab extends Template
      */
     public function getDebugInfo()
     {
-        return array (  156 => 35,  152 => 33,  148 => 31,  137 => 26,  131 => 23,  127 => 21,  123 => 20,  120 => 19,  118 => 18,  111 => 14,  105 => 11,  101 => 10,  97 => 9,  94 => 8,  84 => 7,  70 => 4,  60 => 3,  37 => 1,);
+        return array (  150 => 32,  146 => 30,  142 => 28,  131 => 23,  125 => 20,  121 => 18,  117 => 17,  114 => 16,  112 => 15,  105 => 11,  101 => 10,  97 => 9,  94 => 8,  84 => 7,  70 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -210,10 +219,7 @@ class __TwigTemplate_284916feeafddd3c38ddcc8a2c3ff0ab extends Template
 {% block body %}
     <div class=\"user-profile\">
         <h1>Profil de {{ user.username }}</h1>
-            <button id=\"follow-button\" data-user-id=\"{{ user.id }}\">
-                {{ isFollowing ? 'Se désabonner' : 'S\\'abonner' }}
-            </button>
-
+            <button id=\"follow-button\" data-user-id=\"{{ user.id }}\">Suivre</button>
         <p><strong>Bio :</strong> {{ user.bio ? user.bio : 'Aucune bio disponible.' }}</p>
 
         <section class=\"user-posts\">
@@ -238,13 +244,28 @@ class __TwigTemplate_284916feeafddd3c38ddcc8a2c3ff0ab extends Template
         </section>
     </div>
     <script>
-        document.getElementById('follow-button')?.addEventListener('click', () => {
-            const userId = document.getElementById('follow-button').dataset.userId;
-            fetch(`/user/\${userId}/follow`, { method: 'POST' })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('follow-button').textContent = data.isFollowing ? 'Se désabonner' : 'S\\'abonner';
+        document.getElementById('follow-button').addEventListener('click', async function () {
+            const userId = this.getAttribute('data-user-id');
+            try {
+                const response = await fetch(`/user/\${userId}/follow`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    credentials: 'same-origin', // Inclut les cookies pour l'authentification
                 });
+
+                if (response.ok) {
+                    alert('Utilisateur suivi avec succès.');
+                } else {
+                    const errorData = await response.json();
+                    alert(`Erreur : \${errorData.error || 'Une erreur est survenue.'}`);
+                }
+            } catch (error) {
+                console.error('Erreur lors de la requête :', error);
+                alert('Impossible de suivre cet utilisateur.');
+            }
         });
     </script>
 {% endblock %}

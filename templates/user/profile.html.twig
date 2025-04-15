@@ -7,10 +7,7 @@
 {% block body %}
     <div class="user-profile">
         <h1>Profil de {{ user.username }}</h1>
-            <button id="follow-button" data-user-id="{{ user.id }}">
-                {{ isFollowing ? 'Se désabonner' : 'S\'abonner' }}
-            </button>
-
+            <button id="follow-button" data-user-id="{{ user.id }}">Suivre</button>
         <p><strong>Bio :</strong> {{ user.bio ? user.bio : 'Aucune bio disponible.' }}</p>
 
         <section class="user-posts">
@@ -35,13 +32,28 @@
         </section>
     </div>
     <script>
-        document.getElementById('follow-button')?.addEventListener('click', () => {
-            const userId = document.getElementById('follow-button').dataset.userId;
-            fetch(`/user/${userId}/follow`, { method: 'POST' })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('follow-button').textContent = data.isFollowing ? 'Se désabonner' : 'S\'abonner';
+        document.getElementById('follow-button').addEventListener('click', async function () {
+            const userId = this.getAttribute('data-user-id');
+            try {
+                const response = await fetch(`/user/${userId}/follow`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    credentials: 'same-origin', // Inclut les cookies pour l'authentification
                 });
+
+                if (response.ok) {
+                    alert('Utilisateur suivi avec succès.');
+                } else {
+                    const errorData = await response.json();
+                    alert(`Erreur : ${errorData.error || 'Une erreur est survenue.'}`);
+                }
+            } catch (error) {
+                console.error('Erreur lors de la requête :', error);
+                alert('Impossible de suivre cet utilisateur.');
+            }
         });
     </script>
 {% endblock %}
