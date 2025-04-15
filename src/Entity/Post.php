@@ -153,6 +153,30 @@ class Post
         return $this;
     }
 
+    public function addLike(int $userId): self
+    {
+        if (!in_array($userId, $this->likes ?? [])) {
+            $this->likes[] = $userId;
+        }
+
+        return $this;
+    }
+
+    public function removeLike(int $userId): self
+    {
+        if (($key = array_search($userId, $this->likes ?? [])) !== false) {
+            unset($this->likes[$key]);
+            $this->likes = array_values($this->likes); // Réindexer le tableau
+        }
+
+        return $this;
+    }
+
+    public function getLikesCount(): int
+    {
+        return count($this->likes ?? []);
+    }
+
     public function getHashtags(): ?array
     {
         return $this->hashtags;

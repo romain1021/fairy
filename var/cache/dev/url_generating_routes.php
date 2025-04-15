@@ -25,5 +25,6 @@ return [
     'login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/login']], [], [], []],
     'login_redirect' => [[], ['route' => 'login', '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController'], [], [['text', '/']], [], [], []],
     'new_post' => [[], ['_controller' => 'App\\Controller\\PostController::new'], [], [['text', '/post/new']], [], [], []],
+    'post_like' => [['id'], ['_controller' => 'App\\Controller\\PostController::like'], [], [['text', '/like'], ['variable', '/', '[^/]++', 'id', true], ['text', '/post']], [], [], []],
     'user_profile' => [['id'], ['_controller' => 'App\\Controller\\UserProfileController::index'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/user/profile']], [], [], []],
 ];

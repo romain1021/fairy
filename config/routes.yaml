@@ -14,6 +14,11 @@ new_post:
     path: /post/new
     controller: App\Controller\PostController::new
 
+post_like:
+    path: /post/{id}/like
+    controller: App\Controller\PostController::like
+    methods: POST
+
 user_profile:
     path: /user/profile/{id}
     controller: App\Controller\UserProfileController::index

@@ -35,6 +35,25 @@ class PostController extends AbstractController
         ]);
     }
 
+    #[Route('/post/{id}/like', name: 'post_like', methods: ['POST'])]
+    public function like(int $id, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $post = $entityManager->getRepository(Post::class)->find($id);
+        if (!$post) {
+            throw $this->createNotFoundException('Post non trouvé.');
+        }
+
+        $userId = $request->getSession()->get('user_id');
+        if (!$userId) {
+            return $this->redirectToRoute('login');
+        }
+
+        $post->addLike($userId);
+        $entityManager->flush();
+
+        return $this->json(['likes' => $post->getLikesCount()]);
+    }
+
     #[Route('/logout', name: 'app_logout')]
     public function logout(Request $request): Response
     {

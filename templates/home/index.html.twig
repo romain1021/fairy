@@ -24,6 +24,10 @@
                             <div class="post-content">
                                 {{ post.content }}
                             </div>
+                            <div class="post-likes">
+                                <button class="like-button" data-post-id="{{ post.id }}">j'aime</button>
+                                <span>{{ post.getLikesCount() }} likes</span>
+                            </div>
                             <div class="post-author">
                                 <strong>
                                     <a href="{{ path('user_profile', { id: post.userId }) }}">
@@ -43,4 +47,16 @@
             {% endif %}
         </section>
     </div>
+    <script>
+        document.querySelectorAll('.like-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const postId = button.dataset.postId;
+                fetch(`/post/${postId}/like`, { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        button.nextElementSibling.textContent = `${data.likes} likes`;
+                    });
+            });
+        });
+    </script>
 {% endblock %}
