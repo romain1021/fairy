@@ -128,16 +128,21 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                             </div>
                             <div class=\"post-author\">
                                 <strong>
-                                    ";
+                                    <a href=\"";
                 // line 29
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "getUserName", [], "method", false, false, false, 29), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_profile", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["post"], "userId", [], "any", false, false, false, 29)]), "html", null, true);
+                yield "\">
+                                        ";
+                // line 30
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "getUserName", [], "method", false, false, false, 30), "html", null, true);
                 yield "
+                                    </a>
                                 </strong>
                             </div>
                             <div class=\"post-date\">
                                 ";
-                // line 33
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 33), "d/m/Y H:i"), "html", null, true);
+                // line 35
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 35), "d/m/Y H:i"), "html", null, true);
                 yield "
                             </div>
                         </div>
@@ -147,15 +152,15 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 38
+            // line 40
             yield "                </div>
             ";
         } else {
-            // line 40
+            // line 42
             yield "                <p>Aucun post disponible.</p>
             ";
         }
-        // line 42
+        // line 44
         yield "        </section>
     </div>
 ";
@@ -189,7 +194,7 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  159 => 42,  155 => 40,  151 => 38,  140 => 33,  133 => 29,  126 => 25,  122 => 23,  118 => 22,  115 => 21,  113 => 20,  107 => 16,  101 => 14,  99 => 13,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
+        return array (  164 => 44,  160 => 42,  156 => 40,  145 => 35,  137 => 30,  133 => 29,  126 => 25,  122 => 23,  118 => 22,  115 => 21,  113 => 20,  107 => 16,  101 => 14,  99 => 13,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -222,7 +227,9 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                             </div>
                             <div class=\"post-author\">
                                 <strong>
-                                    {{ post.getUserName() }}
+                                    <a href=\"{{ path('user_profile', { id: post.userId }) }}\">
+                                        {{ post.getUserName() }}
+                                    </a>
                                 </strong>
                             </div>
                             <div class=\"post-date\">

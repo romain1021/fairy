@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Profil de {{ user.username }}
+{% endblock %}
+
+{% block body %}
+    <div class="user-profile">
+        <h1>Profil de {{ user.username }}</h1>
+        <p><strong>Bio :</strong> {{ user.bio ? user.bio : 'Aucune bio disponible.' }}</p>
+
+        <section class="user-posts">
+            <h2>Posts publiés</h2>
+            {% if posts is not empty %}
+                <div class="posts-grid">
+                    {% for post in posts %}
+                        <div class="post-tile">
+                            <div class="post-content">
+                                {{ post.content }}
+                            </div>
+                            <div class="post-date">
+                                Publié le : {{ post.createdAt|date('d/m/Y H:i') }}
+                            </div>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Aucun post publié.</p>
+            {% endif %}
+        </section>
+    </div>
+{% endblock %}
