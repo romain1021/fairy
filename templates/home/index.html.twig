@@ -7,13 +7,13 @@
 {% block body %}
     <div class="home">
         <h1>Accueil</h1>
-            <!-- Affichage des informations de session -->
-            <div class="session-info">
-                <h3>Informations de session</h3>
-                {% if username is not empty %}
-                    <p>Nom d'utilisateur : {{ username }}</p>
-                {% endif %}
-            </div>
+        <!-- Affichage des informations de session -->
+        <div class="session-info">
+            <h3>Informations de session</h3>
+            {% if username is not empty %}
+                <p>Nom d'utilisateur : {{ username }}</p>
+            {% endif %}
+        </div>
 
         <section class="posts-section">
             <h2>Posts</h2>
@@ -38,6 +38,34 @@
                             <div class="post-date">
                                 {{ post.createdAt|date('d/m/Y H:i') }}
                             </div>
+                            <div class="post-actions">
+                                <form action="{{ path('post_repost', { id: post.id }) }}" method="POST">
+                                    <textarea name="comment" placeholder="Ajoutez un commentaire..."></textarea>
+                                    <button type="submit">Reposter</button>
+                                </form>
+                            </div>
+                            {% if post.reposts|length > 0 %}
+                                <div class="reposts">
+                                    <h4>Reposts :</h4>
+                                    {% for repost in post.reposts %}
+                                        <div class="repost-tile">
+                                            <div class="repost-content">
+                                                {{ repost.content }}
+                                            </div>
+                                            <div class="repost-author">
+                                                <strong>
+                                                    <a href="{{ path('user_profile', { id: repost.userId }) }}">
+                                                        {{ repost.getUserName() }}
+                                                    </a>
+                                                </strong>
+                                            </div>
+                                            <div class="repost-date">
+                                                Publié le : {{ repost.createdAt|date('d/m/Y H:i') }}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                         <hr> <!-- Séparation entre les posts -->
                     {% endfor %}

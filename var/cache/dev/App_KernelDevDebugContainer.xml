@@ -6568,10 +6568,14 @@
         <argument key="postRepository" type="service_closure" id="App\Repository\PostRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.Xf_chUG" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".errored.0vOlWP4" class="App\Controller\Request"/>
+    <service id=".errored.CfjZy82" class="App\Controller\LoggerInterface"/>
+    <service id=".service_locator.T2dSDBg" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="postRepository" type="service_closure" id="App\Repository\PostRepository"/>
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="logger" type="service_closure" id=".errored.CfjZy82"/>
+        <argument key="request" type="service_closure" id=".errored.0vOlWP4"/>
       </argument>
     </service>
     <service id=".service_locator.aKM6MDa" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -6580,13 +6584,20 @@
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
-    <service id=".service_locator.ATbDDGo" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.OgZEEkX" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="logger" type="service_closure" id="monolog.logger"/>
+      </argument>
+    </service>
+    <service id=".service_locator.VG0es0k" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\HomeController::index" type="service_closure" id=".service_locator.fcP3Ord"/>
-        <argument key="App\Controller\HomeController::indexPosts" type="service_closure" id=".service_locator.Xf_chUG"/>
+        <argument key="App\Controller\HomeController::repost" type="service_closure" id=".service_locator.T2dSDBg"/>
         <argument key="App\Controller\PostController::like" type="service_closure" id=".service_locator.aKM6MDa"/>
-        <argument key="App\Controller\PostController::new" type="service_closure" id=".service_locator.aKM6MDa"/>
+        <argument key="App\Controller\PostController::repost" type="service_closure" id=".service_locator.OgZEEkX"/>
         <argument key="App\Controller\UserController::followUser" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\UserProfileController::index" type="service_closure" id=".service_locator.fcP3Ord"/>
         <argument key="App\Controller\loginControlleur::login" type="service_closure" id=".service_locator.aKM6MDa"/>
@@ -6596,9 +6607,9 @@
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="App\Controller\HomeController:index" type="service_closure" id=".service_locator.fcP3Ord"/>
-        <argument key="App\Controller\HomeController:indexPosts" type="service_closure" id=".service_locator.Xf_chUG"/>
+        <argument key="App\Controller\HomeController:repost" type="service_closure" id=".service_locator.T2dSDBg"/>
         <argument key="App\Controller\PostController:like" type="service_closure" id=".service_locator.aKM6MDa"/>
-        <argument key="App\Controller\PostController:new" type="service_closure" id=".service_locator.aKM6MDa"/>
+        <argument key="App\Controller\PostController:repost" type="service_closure" id=".service_locator.OgZEEkX"/>
         <argument key="App\Controller\UserController:followUser" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\UserProfileController:index" type="service_closure" id=".service_locator.fcP3Ord"/>
         <argument key="App\Controller\loginControlleur:login" type="service_closure" id=".service_locator.aKM6MDa"/>
@@ -7253,12 +7264,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.ATbDDGo"/>
+      <argument type="service" id=".service_locator.VG0es0k"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.ATbDDGo"/>
+      <argument type="service" id=".service_locator.VG0es0k"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8211,7 +8222,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.ATbDDGo"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.VG0es0k"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8236,7 +8247,8 @@
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.TptAwv6" alias=".service_locator.fcP3Ord"/>
-    <service id=".service_locator.8.DjaVc" alias=".service_locator.ATbDDGo"/>
+    <service id=".service_locator.uBBejtf" alias=".service_locator.T2dSDBg"/>
+    <service id=".service_locator.z5a8Ke5" alias=".service_locator.VG0es0k"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.02UTmgK" alias=".service_locator.YUolH8_"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
@@ -8265,8 +8277,9 @@
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.uo5c0SP" alias=".service_locator.xUrKPVU"/>
     <service id=".service_locator.3KFiawn" alias=".service_locator.fcP3Ord"/>
-    <service id=".service_locator.AtDfmcq" alias=".service_locator.Xf_chUG"/>
+    <service id=".service_locator.fo1Brtf" alias=".service_locator.T2dSDBg"/>
     <service id=".service_locator.bInR.ll" alias=".service_locator.aKM6MDa"/>
+    <service id=".service_locator.yqBbw4j" alias=".service_locator.OgZEEkX"/>
     <service id=".service_locator.A740LBW" alias=".service_locator.mx0UMmY"/>
     <service id=".service_locator.sf85gDo" alias=".service_locator.XmPJruK"/>
     <service id=".service_locator.pFwChgS" alias=".service_locator.UkE3SaZ"/>

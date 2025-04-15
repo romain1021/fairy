@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity]
 #[ORM\Table(name: "posts")]
@@ -40,9 +42,16 @@ class Post
 
     private static ?EntityManagerInterface $globalEntityManager = null;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    #[ORM\OneToMany(mappedBy: 'parentPost', targetEntity: Post::class, cascade: ['persist', 'remove'])]
+    private Collection $reposts;
+
+    #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'reposts')]
+    #[ORM\JoinColumn(name: 'parent_post_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
+    private ?Post $parentPost = null;
+
+    public function __construct()
     {
-        $this->entityManager = $entityManager;
+        $this->reposts = new ArrayCollection();
     }
 
     public static function setGlobalEntityManager(EntityManagerInterface $entityManager): void
@@ -141,6 +150,18 @@ class Post
         return $this;
     }
 
+    public function getParentPost(): ?Post
+    {
+        return $this->parentPost;
+    }
+
+    public function setParentPost(?Post $parentPost): self
+    {
+        $this->parentPost = $parentPost;
+
+        return $this;
+    }
+
     public function getLikes(): ?array
     {
         return $this->likes;
@@ -197,6 +218,32 @@ class Post
     public function setCreatedAt(?\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getReposts(): Collection
+    {
+        return $this->reposts;
+    }
+
+    public function addRepost(Post $repost): self
+    {
+        if (!$this->reposts->contains($repost)) {
+            $this->reposts[] = $repost;
+            $repost->setParentPostId($this->id);
+        }
+
+        return $this;
+    }
+
+    public function removeRepost(Post $repost): self
+    {
+        if ($this->reposts->removeElement($repost)) {
+            if ($repost->getParentPostId() === $this->id) {
+                $repost->setParentPostId(null);
+            }
+        }
 
         return $this;
     }

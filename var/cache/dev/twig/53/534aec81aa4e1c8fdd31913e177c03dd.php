@@ -91,20 +91,20 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
         // line 8
         yield "    <div class=\"home\">
         <h1>Accueil</h1>
-            <!-- Affichage des informations de session -->
-            <div class=\"session-info\">
-                <h3>Informations de session</h3>
-                ";
+        <!-- Affichage des informations de session -->
+        <div class=\"session-info\">
+            <h3>Informations de session</h3>
+            ";
         // line 13
         if ( !Twig\Extension\CoreExtension::testEmpty((isset($context["username"]) || array_key_exists("username", $context) ? $context["username"] : (function () { throw new RuntimeError('Variable "username" does not exist.', 13, $this->source); })()))) {
             // line 14
-            yield "                    <p>Nom d'utilisateur : ";
+            yield "                <p>Nom d'utilisateur : ";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["username"]) || array_key_exists("username", $context) ? $context["username"] : (function () { throw new RuntimeError('Variable "username" does not exist.', 14, $this->source); })()), "html", null, true);
             yield "</p>
-                ";
+            ";
         }
         // line 16
-        yield "            </div>
+        yield "        </div>
 
         <section class=\"posts-section\">
             <h2>Posts</h2>
@@ -155,22 +155,80 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 39), "d/m/Y H:i"), "html", null, true);
                 yield "
                             </div>
-                        </div>
+                            <div class=\"post-actions\">
+                                <form action=\"";
+                // line 42
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("post_repost", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["post"], "id", [], "any", false, false, false, 42)]), "html", null, true);
+                yield "\" method=\"POST\">
+                                    <textarea name=\"comment\" placeholder=\"Ajoutez un commentaire...\"></textarea>
+                                    <button type=\"submit\">Reposter</button>
+                                </form>
+                            </div>
+                            ";
+                // line 47
+                if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["post"], "reposts", [], "any", false, false, false, 47)) > 0)) {
+                    // line 48
+                    yield "                                <div class=\"reposts\">
+                                    <h4>Reposts :</h4>
+                                    ";
+                    // line 50
+                    $context['_parent'] = $context;
+                    $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "reposts", [], "any", false, false, false, 50));
+                    foreach ($context['_seq'] as $context["_key"] => $context["repost"]) {
+                        // line 51
+                        yield "                                        <div class=\"repost-tile\">
+                                            <div class=\"repost-content\">
+                                                ";
+                        // line 53
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "content", [], "any", false, false, false, 53), "html", null, true);
+                        yield "
+                                            </div>
+                                            <div class=\"repost-author\">
+                                                <strong>
+                                                    <a href=\"";
+                        // line 57
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_profile", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "userId", [], "any", false, false, false, 57)]), "html", null, true);
+                        yield "\">
+                                                        ";
+                        // line 58
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "getUserName", [], "method", false, false, false, 58), "html", null, true);
+                        yield "
+                                                    </a>
+                                                </strong>
+                                            </div>
+                                            <div class=\"repost-date\">
+                                                Publié le : ";
+                        // line 63
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "createdAt", [], "any", false, false, false, 63), "d/m/Y H:i"), "html", null, true);
+                        yield "
+                                            </div>
+                                        </div>
+                                    ";
+                    }
+                    $_parent = $context['_parent'];
+                    unset($context['_seq'], $context['_iterated'], $context['_key'], $context['repost'], $context['_parent'], $context['loop']);
+                    $context = array_intersect_key($context, $_parent) + $_parent;
+                    // line 67
+                    yield "                                </div>
+                            ";
+                }
+                // line 69
+                yield "                        </div>
                         <hr> <!-- Séparation entre les posts -->
                     ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 44
+            // line 72
             yield "                </div>
             ";
         } else {
-            // line 46
+            // line 74
             yield "                <p>Aucun post disponible.</p>
             ";
         }
-        // line 48
+        // line 76
         yield "        </section>
     </div>
     <script>
@@ -216,7 +274,7 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  174 => 48,  170 => 46,  166 => 44,  155 => 39,  147 => 34,  143 => 33,  136 => 29,  132 => 28,  126 => 25,  122 => 23,  118 => 22,  115 => 21,  113 => 20,  107 => 16,  101 => 14,  99 => 13,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
+        return array (  232 => 76,  228 => 74,  224 => 72,  216 => 69,  212 => 67,  202 => 63,  194 => 58,  190 => 57,  183 => 53,  179 => 51,  175 => 50,  171 => 48,  169 => 47,  161 => 42,  155 => 39,  147 => 34,  143 => 33,  136 => 29,  132 => 28,  126 => 25,  122 => 23,  118 => 22,  115 => 21,  113 => 20,  107 => 16,  101 => 14,  99 => 13,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -230,13 +288,13 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
 {% block body %}
     <div class=\"home\">
         <h1>Accueil</h1>
-            <!-- Affichage des informations de session -->
-            <div class=\"session-info\">
-                <h3>Informations de session</h3>
-                {% if username is not empty %}
-                    <p>Nom d'utilisateur : {{ username }}</p>
-                {% endif %}
-            </div>
+        <!-- Affichage des informations de session -->
+        <div class=\"session-info\">
+            <h3>Informations de session</h3>
+            {% if username is not empty %}
+                <p>Nom d'utilisateur : {{ username }}</p>
+            {% endif %}
+        </div>
 
         <section class=\"posts-section\">
             <h2>Posts</h2>
@@ -261,6 +319,34 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                             <div class=\"post-date\">
                                 {{ post.createdAt|date('d/m/Y H:i') }}
                             </div>
+                            <div class=\"post-actions\">
+                                <form action=\"{{ path('post_repost', { id: post.id }) }}\" method=\"POST\">
+                                    <textarea name=\"comment\" placeholder=\"Ajoutez un commentaire...\"></textarea>
+                                    <button type=\"submit\">Reposter</button>
+                                </form>
+                            </div>
+                            {% if post.reposts|length > 0 %}
+                                <div class=\"reposts\">
+                                    <h4>Reposts :</h4>
+                                    {% for repost in post.reposts %}
+                                        <div class=\"repost-tile\">
+                                            <div class=\"repost-content\">
+                                                {{ repost.content }}
+                                            </div>
+                                            <div class=\"repost-author\">
+                                                <strong>
+                                                    <a href=\"{{ path('user_profile', { id: repost.userId }) }}\">
+                                                        {{ repost.getUserName() }}
+                                                    </a>
+                                                </strong>
+                                            </div>
+                                            <div class=\"repost-date\">
+                                                Publié le : {{ repost.createdAt|date('d/m/Y H:i') }}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                         <hr> <!-- Séparation entre les posts -->
                     {% endfor %}

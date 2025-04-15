@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Entity\User;
 use App\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class HomeController extends AbstractController
 {
@@ -40,14 +41,53 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/home', name: 'app_home')]
-    public function indexPosts(PostRepository $postRepository): Response
-    {
-        $posts = $postRepository->findBy([], ['id' => 'ASC']);
+    #[Route('/post/{id}/repost', name: 'post_repost', methods: ['POST'])]
+    public function repost(
+        int $id,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        LoggerInterface $logger
+    ): JsonResponse {
+        try {
+            // Récupérer le post original
+            $originalPost = $entityManager->getRepository(Post::class)->find($id);
+            if (!$originalPost) {
+                return $this->json(['error' => 'Post original introuvable.'], 404);
+            }
 
-        return $this->render('home/index.html.twig', [
-            'posts' => $posts,
-        ]);
+            // Récupérer l'ID utilisateur depuis la session
+            $userId = $request->getSession()->get('user_id');
+            if (!$userId) {
+                return $this->json(['error' => 'Utilisateur non authentifié.'], 403);
+            }
+
+            // Créer le repost
+            $content = $request->get('comment', '');
+            $repost = new Post();
+            $repost->setContent($content);
+            $repost->setUserId($userId);
+            $repost->setCreatedAt(new \DateTime());
+            $repost->setParentPost($originalPost);
+
+            $entityManager->persist($repost);
+            $entityManager->flush();
+
+            // Récupérer les informations du repost pour la réponse
+            $postData = [
+                'id' => $repost->getId(),
+                'content' => $repost->getContent(),
+                'userId' => $repost->getUserId(),
+                'createdAt' => $repost->getCreatedAt()->format('d/m/Y H:i'),
+                'username' => $repost->getUserName(),
+            ];
+
+            return $this->json([
+                'message' => 'Repost créé avec succès.',
+                'repost' => $postData,
+            ]);
+        } catch (\Exception $e) {
+            return $this->json(['error' => 'Une erreur est survenue lors de la création du repost.'], 500);
+        }
     }
 
     #[Route('/logout', name: 'app_logout')]

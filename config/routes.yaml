@@ -19,6 +19,11 @@ post_like:
     controller: App\Controller\PostController::like
     methods: POST
 
+post_repost:
+    path: /post/{id}/repost
+    controller: App\Controller\PostController::repost
+    methods: POST
+
 user_profile:
     path: /user/profile/{id}
     controller: App\Controller\UserProfileController::index

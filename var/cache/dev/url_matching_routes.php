@@ -12,7 +12,6 @@ return [
             [['_route' => 'home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null],
             [['_route' => 'login_redirect', 'route' => 'login', '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController'], null, null, null, false, false, null],
         ],
-        '/home' => [[['_route' => 'app_home', '_controller' => 'App\\Controller\\HomeController::indexPosts'], null, null, null, false, false, null]],
         '/post' => [[['_route' => 'post', '_controller' => 'App\\Controller\\PostController::new'], null, null, null, false, false, null]],
         '/login' => [
             [['_route' => 'app_login', '_controller' => 'App\\Controller\\loginControlleur::login'], null, null, null, false, false, null],
@@ -45,10 +44,13 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
-                .'|/post/([^/]++)/like(*:188)'
+                .'|/post/([^/]++)/(?'
+                    .'|like(*:191)'
+                    .'|repost(*:205)'
+                .')'
                 .'|/user/(?'
-                    .'|profile/([^/]++)(*:221)'
-                    .'|([^/]++)/follow(*:244)'
+                    .'|profile/([^/]++)(*:239)'
+                    .'|([^/]++)/follow(*:262)'
                 .')'
             .')/?$}sDu',
     ],
@@ -60,9 +62,10 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        188 => [[['_route' => 'post_like', '_controller' => 'App\\Controller\\PostController::like'], ['id'], ['POST' => 0], null, false, false, null]],
-        221 => [[['_route' => 'user_profile', '_controller' => 'App\\Controller\\UserProfileController::index'], ['id'], null, null, false, true, null]],
-        244 => [
+        191 => [[['_route' => 'post_like', '_controller' => 'App\\Controller\\PostController::like'], ['id'], ['POST' => 0], null, false, false, null]],
+        205 => [[['_route' => 'post_repost', '_controller' => 'App\\Controller\\PostController::repost'], ['id'], ['POST' => 0], null, false, false, null]],
+        239 => [[['_route' => 'user_profile', '_controller' => 'App\\Controller\\UserProfileController::index'], ['id'], null, null, false, true, null]],
+        262 => [
             [['_route' => 'user_follow', '_controller' => 'App\\Controller\\UserController::followUser'], ['id'], ['POST' => 0], null, false, false, null],
             [null, null, null, null, false, false, 0],
         ],
