@@ -12,18 +12,27 @@
             <h3>Informations de session</h3>
             {% if username is not empty %}
                 <p>Nom d'utilisateur : {{ username }}</p>
+                <div class="session-actions">
+                    <a href="{{ path('app_logout') }}" class="btn btn-danger">Se Déconnecter</a>
+                    <a href="{{ path('new_post') }}" class="btn btn-primary">Créer un Post</a>
+                </div>
             {% endif %}
         </div>
 
         <section class="posts-section">
             <h2>Posts</h2>
             {% if posts is not empty %}
-                <div class="posts-grid">
+                <div class="posts-tiles">
                     {% for post in posts %}
                         <div class="post-tile">
                             <div class="post-content">
                                 {{ post.content }}
                             </div>
+                            {% if post.mediaUrl %}
+                                <div class="post-image">
+                                    <img src="{{ asset('uploads/' ~ post.mediaUrl) }}" alt="Image du post" class="uniform-image">
+                                </div>
+                            {% endif %}
                             <div class="post-likes">
                                 <button class="like-button" data-post-id="{{ post.id }}">j'aime</button>
                                 <span>{{ post.getLikesCount() }} likes</span>
@@ -52,6 +61,11 @@
                                             <div class="repost-content">
                                                 {{ repost.content }}
                                             </div>
+                                            {% if repost.mediaUrl %}
+                                                <div class="repost-image">
+                                                    <img src="{{ asset('uploads/' ~ repost.mediaUrl) }}" alt="Image du repost" class="uniform-image">
+                                                </div>
+                                            {% endif %}
                                             <div class="repost-author">
                                                 <strong>
                                                     <a href="{{ path('user_profile', { id: repost.userId }) }}">

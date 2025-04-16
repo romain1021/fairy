@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class PostController extends AbstractController
 {
@@ -27,13 +28,22 @@ class PostController extends AbstractController
             $user = $this->getUser();
             $userId = $user ? $user->getId() : $request->getSession()->get('user_id');
 
-            if (!$userId) {
-                $this->addFlash('error', 'Vous devez être connecté pour créer un post.');
-                return $this->redirectToRoute('login');
-            }
-
             $post->setUserId($userId);
             $post->setCreatedAt(new \DateTime());
+
+            // Gestion du fichier image
+            $imageFile = $form->get('mediaUrl')->getData();
+            if ($imageFile) {
+                $uploadsDir = $this->getParameter('uploads_directory');
+                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+
+                try {
+                    $imageFile->move($uploadsDir, $newFilename);
+                    $post->setMediaUrl($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Erreur lors du téléchargement de l\'image.');
+                }
+            }
 
             $entityManager->persist($post);
             $entityManager->flush();

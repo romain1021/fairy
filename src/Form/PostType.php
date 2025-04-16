@@ -6,6 +6,7 @@ use App\Entity\Post;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,6 +21,12 @@ class PostType extends AbstractType
             ])
             ->add('userId', HiddenType::class, [
                 'mapped' => false,
+            ])
+            ->add('mediaUrl', FileType::class, [
+                'label' => 'Importer une image',
+                'required' => false,
+                'mapped' => false,
+                'attr' => ['accept' => 'image/*'],
             ]);
     }
 

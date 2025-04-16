@@ -1,8 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page d'Accueil Utilisateur{% endblock %}
+{% block title %}
+    Page d'Accueil Utilisateur
+{% endblock %}
 
 {% block body %}
     <h1>Bienvenue sur votre page d'accueil, {{ app.user.username }}!</h1>
     <p>Vous êtes maintenant connecté(e).</p>
+    <div class="actions">
+        <a href="{{ path('logout') }}" class="btn btn-danger">Se Déconnecter</a>
+        <a href="{{ path('new_post') }}" class="btn btn-primary">Créer un Post</a>
+        <a href="{{ path('user_following') }}" class="btn btn-secondary">Voir les utilisateurs suivis</a>
+    </div>
 {% endblock %}

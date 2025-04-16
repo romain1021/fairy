@@ -34,10 +34,13 @@ class UserProfileController extends AbstractController
             );
         }
 
+        $showFollowButton = $currentUser && $currentUser->getId() !== $id;
+
         return $this->render('user/profile.html.twig', [
             'user' => $user,
             'posts' => $posts,
             'isFollowing' => $isFollowing,
+            'showFollowButton' => $showFollowButton, // Correction pour transmettre la variable
         ]);
     }
 }

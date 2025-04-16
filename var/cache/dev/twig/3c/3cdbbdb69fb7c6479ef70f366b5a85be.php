@@ -96,39 +96,46 @@ class __TwigTemplate_284916feeafddd3c38ddcc8a2c3ff0ab extends Template
         // line 9
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 9, $this->source); })()), "username", [], "any", false, false, false, 9), "html", null, true);
         yield "</h1>
-            <button id=\"follow-button\" data-user-id=\"";
+        ";
         // line 10
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 10, $this->source); })()), "id", [], "any", false, false, false, 10), "html", null, true);
-        yield "\">Suivre</button>
-        <p><strong>Bio :</strong> ";
-        // line 11
-        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 11, $this->source); })()), "bio", [], "any", false, false, false, 11)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 11, $this->source); })()), "bio", [], "any", false, false, false, 11), "html", null, true)) : (yield "Aucune bio disponible."));
+        if ((isset($context["showFollowButton"]) || array_key_exists("showFollowButton", $context) ? $context["showFollowButton"] : (function () { throw new RuntimeError('Variable "showFollowButton" does not exist.', 10, $this->source); })())) {
+            // line 11
+            yield "            <form method=\"post\" action=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_follow", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 11, $this->source); })()), "id", [], "any", false, false, false, 11)]), "html", null, true);
+            yield "\">
+                <button type=\"submit\">Suivre</button>
+            </form>
+        ";
+        }
+        // line 15
+        yield "        <p><strong>Bio :</strong> ";
+        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 15, $this->source); })()), "bio", [], "any", false, false, false, 15)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 15, $this->source); })()), "bio", [], "any", false, false, false, 15), "html", null, true)) : (yield "Aucune bio disponible."));
         yield "</p>
 
         <section class=\"user-posts\">
             <h2>Posts publiés</h2>
             ";
-        // line 15
-        if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 15, $this->source); })())) > 0)) {
-            // line 16
+        // line 19
+        if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 19, $this->source); })())) > 0)) {
+            // line 20
             yield "                <div class=\"posts-grid\">
                     ";
-            // line 17
+            // line 21
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 17, $this->source); })()));
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 21, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["post"]) {
-                // line 18
+                // line 22
                 yield "                        <div class=\"post-tile\">
                             <div class=\"post-content\">
                                 ";
-                // line 20
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "content", [], "any", false, false, false, 20), "html", null, true);
+                // line 24
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "content", [], "any", false, false, false, 24), "html", null, true);
                 yield "
                             </div>
                             <div class=\"post-date\">
                                 Publié le : ";
-                // line 23
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 23), "d/m/Y H:i"), "html", null, true);
+                // line 27
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 27), "d/m/Y H:i"), "html", null, true);
                 yield "
                             </div>
                         </div>
@@ -138,15 +145,15 @@ class __TwigTemplate_284916feeafddd3c38ddcc8a2c3ff0ab extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 28
+            // line 32
             yield "                </div>
             ";
         } else {
-            // line 30
+            // line 34
             yield "                <p>Aucun post publié.</p>
             ";
         }
-        // line 32
+        // line 36
         yield "        </section>
     </div>
     <script>
@@ -205,7 +212,7 @@ class __TwigTemplate_284916feeafddd3c38ddcc8a2c3ff0ab extends Template
      */
     public function getDebugInfo()
     {
-        return array (  150 => 32,  146 => 30,  142 => 28,  131 => 23,  125 => 20,  121 => 18,  117 => 17,  114 => 16,  112 => 15,  105 => 11,  101 => 10,  97 => 9,  94 => 8,  84 => 7,  70 => 4,  60 => 3,  37 => 1,);
+        return array (  157 => 36,  153 => 34,  149 => 32,  138 => 27,  132 => 24,  128 => 22,  124 => 21,  121 => 20,  119 => 19,  111 => 15,  103 => 11,  101 => 10,  97 => 9,  94 => 8,  84 => 7,  70 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -219,7 +226,11 @@ class __TwigTemplate_284916feeafddd3c38ddcc8a2c3ff0ab extends Template
 {% block body %}
     <div class=\"user-profile\">
         <h1>Profil de {{ user.username }}</h1>
-            <button id=\"follow-button\" data-user-id=\"{{ user.id }}\">Suivre</button>
+        {% if showFollowButton %}
+            <form method=\"post\" action=\"{{ path('user_follow', { id: user.id }) }}\">
+                <button type=\"submit\">Suivre</button>
+            </form>
+        {% endif %}
         <p><strong>Bio :</strong> {{ user.bio ? user.bio : 'Aucune bio disponible.' }}</p>
 
         <section class=\"user-posts\">

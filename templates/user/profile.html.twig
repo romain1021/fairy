@@ -7,7 +7,11 @@
 {% block body %}
     <div class="user-profile">
         <h1>Profil de {{ user.username }}</h1>
-            <button id="follow-button" data-user-id="{{ user.id }}">Suivre</button>
+        {% if showFollowButton %}
+            <form method="post" action="{{ path('user_follow', { id: user.id }) }}">
+                <button type="submit">Suivre</button>
+            </form>
+        {% endif %}
         <p><strong>Bio :</strong> {{ user.bio ? user.bio : 'Aucune bio disponible.' }}</p>
 
         <section class="user-posts">

@@ -64,6 +64,7 @@
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
+    <parameter key="uploads_directory">/Users/romain/www/fairy/public/uploads</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -6591,7 +6592,7 @@
         <argument key="logger" type="service_closure" id="monolog.logger"/>
       </argument>
     </service>
-    <service id=".service_locator.NIxDHu8" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.T97wOIe" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\HomeController::index" type="service_closure" id=".service_locator.fcP3Ord"/>
@@ -6599,7 +6600,7 @@
         <argument key="App\Controller\PostController::like" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\PostController::new" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\PostController::repost" type="service_closure" id=".service_locator.OgZEEkX"/>
-        <argument key="App\Controller\UserController::followUser" type="service_closure" id=".service_locator.aKM6MDa"/>
+        <argument key="App\Controller\UserController::follow" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\UserProfileController::index" type="service_closure" id=".service_locator.fcP3Ord"/>
         <argument key="App\Controller\loginControlleur::login" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\loginControlleur::register" type="service_closure" id=".service_locator.aKM6MDa"/>
@@ -6612,7 +6613,7 @@
         <argument key="App\Controller\PostController:like" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\PostController:new" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\PostController:repost" type="service_closure" id=".service_locator.OgZEEkX"/>
-        <argument key="App\Controller\UserController:followUser" type="service_closure" id=".service_locator.aKM6MDa"/>
+        <argument key="App\Controller\UserController:follow" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\UserProfileController:index" type="service_closure" id=".service_locator.fcP3Ord"/>
         <argument key="App\Controller\loginControlleur:login" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\loginControlleur:register" type="service_closure" id=".service_locator.aKM6MDa"/>
@@ -7266,12 +7267,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.NIxDHu8"/>
+      <argument type="service" id=".service_locator.T97wOIe"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.NIxDHu8"/>
+      <argument type="service" id=".service_locator.T97wOIe"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8224,7 +8225,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.NIxDHu8"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.T97wOIe"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8250,7 +8251,7 @@
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.TptAwv6" alias=".service_locator.fcP3Ord"/>
     <service id=".service_locator.uBBejtf" alias=".service_locator.T2dSDBg"/>
-    <service id=".service_locator.sSR9bu4" alias=".service_locator.NIxDHu8"/>
+    <service id=".service_locator.kssUtdI" alias=".service_locator.T97wOIe"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.02UTmgK" alias=".service_locator.YUolH8_"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
