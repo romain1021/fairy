@@ -16,29 +16,34 @@ use Psr\Log\LoggerInterface;
 class PostController extends AbstractController
 {
     #[Route('/post', name: 'post')]
-    public function new(Request $request): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $content = $request->request->get('content');
-        $parentPostId = $request->request->get('parentPostId');
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
 
-        $newPost = new Post();
-        $newPost->setContent($content);
-        $newPost->setUserId($this->getUser()->getId());
-        $newPost->setCreatedAt(new \DateTime());
+        $form->handleRequest($request);
 
-        if ($parentPostId) {
-            $parentPost = $entityManager->getRepository(Post::class)->find($parentPostId);
-            if ($parentPost) {
-                $newPost->setParentPostId($parentPost->getId());
-                $parentPost->addRepost($newPost);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $userId = $user ? $user->getId() : $request->getSession()->get('user_id');
+
+            if (!$userId) {
+                $this->addFlash('error', 'Vous devez être connecté pour créer un post.');
+                return $this->redirectToRoute('login');
             }
+
+            $post->setUserId($userId);
+            $post->setCreatedAt(new \DateTime());
+
+            $entityManager->persist($post);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('home');
         }
 
-        $entityManager->persist($newPost);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('home');
+        return $this->render('post/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     #[Route('/post/{id}/like', name: 'post_like', methods: ['POST'])]
@@ -49,7 +54,7 @@ class PostController extends AbstractController
             throw $this->createNotFoundException('Post non trouvé.');
         }
 
-        $userId = $request->getSession()->get('user_id');
+        $userId = $this->getUser() ? $this->getUser()->getId() : $request->getSession()->get('user_id');
         if (!$userId) {
             return $this->redirectToRoute('login');
         }

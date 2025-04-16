@@ -283,7 +283,7 @@ class Post extends \App\Entity\Post implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setContent(string $content): \App\Entity\Post
+    public function setContent(?string $content): \App\Entity\Post
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setContent', [$content]);

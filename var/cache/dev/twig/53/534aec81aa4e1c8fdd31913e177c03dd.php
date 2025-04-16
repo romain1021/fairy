@@ -223,21 +223,20 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                 }
                 // line 75
                 yield "                        </div>
-                        <hr> <!-- Séparation entre les posts -->
                     ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 78
+            // line 77
             yield "                </div>
             ";
         } else {
-            // line 80
+            // line 79
             yield "                <p>Aucun post disponible.</p>
             ";
         }
-        // line 82
+        // line 81
         yield "        </section>
     </div>
     <script>
@@ -283,7 +282,7 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  241 => 82,  237 => 80,  233 => 78,  225 => 75,  221 => 73,  208 => 66,  202 => 63,  194 => 58,  190 => 57,  183 => 53,  179 => 51,  175 => 50,  171 => 48,  169 => 47,  161 => 42,  155 => 39,  147 => 34,  143 => 33,  136 => 29,  132 => 28,  126 => 25,  122 => 23,  118 => 22,  115 => 21,  113 => 20,  107 => 16,  101 => 14,  99 => 13,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
+        return array (  240 => 81,  236 => 79,  232 => 77,  225 => 75,  221 => 73,  208 => 66,  202 => 63,  194 => 58,  190 => 57,  183 => 53,  179 => 51,  175 => 50,  171 => 48,  169 => 47,  161 => 42,  155 => 39,  147 => 34,  143 => 33,  136 => 29,  132 => 28,  126 => 25,  122 => 23,  118 => 22,  115 => 21,  113 => 20,  107 => 16,  101 => 14,  99 => 13,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -363,7 +362,6 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                                 </div>
                             {% endif %}
                         </div>
-                        <hr> <!-- Séparation entre les posts -->
                     {% endfor %}
                 </div>
             {% else %}

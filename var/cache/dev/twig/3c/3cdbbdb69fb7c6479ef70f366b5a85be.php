@@ -132,7 +132,7 @@ class __TwigTemplate_284916feeafddd3c38ddcc8a2c3ff0ab extends Template
                 yield "
                             </div>
                         </div>
-                        <hr>
+
                     ";
             }
             $_parent = $context['_parent'];
@@ -235,7 +235,7 @@ class __TwigTemplate_284916feeafddd3c38ddcc8a2c3ff0ab extends Template
                                 Publié le : {{ post.createdAt|date('d/m/Y H:i') }}
                             </div>
                         </div>
-                        <hr>
+
                     {% endfor %}
                 </div>
             {% else %}

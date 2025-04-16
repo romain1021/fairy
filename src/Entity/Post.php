@@ -119,8 +119,11 @@ class Post
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    public function setContent(?string $content): self
     {
+        if ($content === null) {
+            throw new \InvalidArgumentException('Content cannot be null.');
+        }
         $this->content = $content;
 
         return $this;
