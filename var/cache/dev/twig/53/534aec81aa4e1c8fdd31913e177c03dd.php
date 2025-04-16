@@ -91,161 +91,159 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
         // line 8
         yield "    <div class=\"home\">
         <h1>Accueil</h1>
-        <!-- Affichage des informations de session -->
-        <div class=\"session-info\">
-            <h3>Informations de session</h3>
-            ";
+<h2>Bienvenue ";
+        // line 10
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["username"]) || array_key_exists("username", $context) ? $context["username"] : (function () { throw new RuntimeError('Variable "username" does not exist.', 10, $this->source); })()), "html", null, true);
+        yield "</h2>
+
+        <div class=\"user-actions\">
+                    <form action=\"";
         // line 13
-        if ( !Twig\Extension\CoreExtension::testEmpty((isset($context["username"]) || array_key_exists("username", $context) ? $context["username"] : (function () { throw new RuntimeError('Variable "username" does not exist.', 13, $this->source); })()))) {
-            // line 14
-            yield "                <p>Nom d'utilisateur : ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["username"]) || array_key_exists("username", $context) ? $context["username"] : (function () { throw new RuntimeError('Variable "username" does not exist.', 14, $this->source); })()), "html", null, true);
-            yield "</p>
-                <div class=\"session-actions\">
-                    <a href=\"";
-            // line 16
-            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
-            yield "\" class=\"btn btn-danger\">Se Déconnecter</a>
-                    <a href=\"";
-            // line 17
-            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("new_post");
-            yield "\" class=\"btn btn-primary\">Créer un Post</a>
-                    <a href=\"";
-            // line 18
-            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_user_edit");
-            yield "\" class=\"btn btn-primary\">Modifier mes informations</a>
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
+        yield "\" method=\"POST\">
+                        <button type=\"submit\" class=\"btn btn-danger\">Se Déconnecter</button>
+                    </form>
+                    <form action=\"";
+        // line 16
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("new_post");
+        yield "\" method=\"GET\">
+                        <button type=\"submit\" class=\"btn btn-primary\">Créer un Post</button>
+                    </form>
+                    <form action=\"";
+        // line 19
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_user_edit");
+        yield "\" method=\"GET\">
+                        <button type=\"submit\" class=\"btn btn-primary\">Modifier mes informations</button>
+                    </form>
                 </div>
-            ";
-        }
-        // line 21
-        yield "        </div>
+        </div>
 
         <section class=\"posts-section\">
             <h2>Posts</h2>
             ";
-        // line 25
-        if ( !Twig\Extension\CoreExtension::testEmpty((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 25, $this->source); })()))) {
-            // line 26
+        // line 27
+        if ( !Twig\Extension\CoreExtension::testEmpty((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 27, $this->source); })()))) {
+            // line 28
             yield "                <div class=\"posts-tiles\">
                     ";
-            // line 27
+            // line 29
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 27, $this->source); })()));
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["posts"]) || array_key_exists("posts", $context) ? $context["posts"] : (function () { throw new RuntimeError('Variable "posts" does not exist.', 29, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["post"]) {
-                // line 28
+                // line 30
                 yield "                        <div class=\"post-tile\">
                             <div class=\"post-content\">
                                 ";
-                // line 30
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "content", [], "any", false, false, false, 30), "html", null, true);
+                // line 32
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "content", [], "any", false, false, false, 32), "html", null, true);
                 yield "
                             </div>
                             ";
-                // line 32
-                if (CoreExtension::getAttribute($this->env, $this->source, $context["post"], "mediaUrl", [], "any", false, false, false, 32)) {
-                    // line 33
+                // line 34
+                if (CoreExtension::getAttribute($this->env, $this->source, $context["post"], "mediaUrl", [], "any", false, false, false, 34)) {
+                    // line 35
                     yield "                                <div class=\"post-image\">
                                     <img src=\"";
-                    // line 34
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . CoreExtension::getAttribute($this->env, $this->source, $context["post"], "mediaUrl", [], "any", false, false, false, 34))), "html", null, true);
+                    // line 36
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . CoreExtension::getAttribute($this->env, $this->source, $context["post"], "mediaUrl", [], "any", false, false, false, 36))), "html", null, true);
                     yield "\" alt=\"Image du post\" class=\"uniform-image\">
                                 </div>
                             ";
                 }
-                // line 37
+                // line 39
                 yield "                            <div class=\"post-likes\">
                                 <button class=\"like-button\" data-post-id=\"";
-                // line 38
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "id", [], "any", false, false, false, 38), "html", null, true);
+                // line 40
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "id", [], "any", false, false, false, 40), "html", null, true);
                 yield "\">j'aime</button>
                                 <span>";
-                // line 39
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "getLikesCount", [], "method", false, false, false, 39), "html", null, true);
+                // line 41
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "getLikesCount", [], "method", false, false, false, 41), "html", null, true);
                 yield " likes</span>
                             </div>
                             <div class=\"post-author\">
                                 <strong>
                                     <a href=\"";
-                // line 43
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_profile", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["post"], "userId", [], "any", false, false, false, 43)]), "html", null, true);
+                // line 45
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_profile", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["post"], "userId", [], "any", false, false, false, 45)]), "html", null, true);
                 yield "\">
                                         ";
-                // line 44
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "getUserName", [], "method", false, false, false, 44), "html", null, true);
+                // line 46
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "getUserName", [], "method", false, false, false, 46), "html", null, true);
                 yield "
                                     </a>
                                 </strong>
                             </div>
                             <div class=\"post-date\">
                                 ";
-                // line 49
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 49), "d/m/Y H:i"), "html", null, true);
+                // line 51
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "createdAt", [], "any", false, false, false, 51), "d/m/Y H:i"), "html", null, true);
                 yield "
                             </div>
                             <div class=\"post-actions\">
                                 <form action=\"";
-                // line 52
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("post_repost", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["post"], "id", [], "any", false, false, false, 52)]), "html", null, true);
+                // line 54
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("post_repost", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["post"], "id", [], "any", false, false, false, 54)]), "html", null, true);
                 yield "\" method=\"POST\">
                                     <textarea name=\"comment\" placeholder=\"\"></textarea>
                                     <button type=\"submit\">Repondre</button>
                                 </form>
                             </div>
                             ";
-                // line 57
-                if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["post"], "reposts", [], "any", false, false, false, 57)) > 0)) {
-                    // line 58
+                // line 59
+                if ((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["post"], "reposts", [], "any", false, false, false, 59)) > 0)) {
+                    // line 60
                     yield "                                <div class=\"reposts\">
                                     <h4>Reposts :</h4>
                                     ";
-                    // line 60
+                    // line 62
                     $context['_parent'] = $context;
-                    $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "reposts", [], "any", false, false, false, 60));
+                    $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, $context["post"], "reposts", [], "any", false, false, false, 62));
                     foreach ($context['_seq'] as $context["_key"] => $context["repost"]) {
-                        // line 61
+                        // line 63
                         yield "                                        <div class=\"repost-tile\">
                                             <div class=\"repost-content\">
                                                 ";
-                        // line 63
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "content", [], "any", false, false, false, 63), "html", null, true);
+                        // line 65
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "content", [], "any", false, false, false, 65), "html", null, true);
                         yield "
                                             </div>
                                             ";
-                        // line 65
-                        if (CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "mediaUrl", [], "any", false, false, false, 65)) {
-                            // line 66
+                        // line 67
+                        if (CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "mediaUrl", [], "any", false, false, false, 67)) {
+                            // line 68
                             yield "                                                <div class=\"repost-image\">
                                                     <img src=\"";
-                            // line 67
-                            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "mediaUrl", [], "any", false, false, false, 67))), "html", null, true);
+                            // line 69
+                            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "mediaUrl", [], "any", false, false, false, 69))), "html", null, true);
                             yield "\" alt=\"Image du repost\" class=\"uniform-image\">
                                                 </div>
                                             ";
                         }
-                        // line 70
+                        // line 72
                         yield "                                            <div class=\"repost-author\">
                                                 <strong>
                                                     <a href=\"";
-                        // line 72
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_profile", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "userId", [], "any", false, false, false, 72)]), "html", null, true);
+                        // line 74
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_profile", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "userId", [], "any", false, false, false, 74)]), "html", null, true);
                         yield "\">
                                                         ";
-                        // line 73
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "getUserName", [], "method", false, false, false, 73), "html", null, true);
+                        // line 75
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "getUserName", [], "method", false, false, false, 75), "html", null, true);
                         yield "
                                                     </a>
                                                 </strong>
                                             </div>
                                             <div class=\"repost-date\">
                                                 Publié le : ";
-                        // line 78
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "createdAt", [], "any", false, false, false, 78), "d/m/Y H:i"), "html", null, true);
+                        // line 80
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "createdAt", [], "any", false, false, false, 80), "d/m/Y H:i"), "html", null, true);
                         yield "
                                             </div>
                                             <div class=\"repost-actions\">
                                                 <form action=\"";
-                        // line 81
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("post_repost", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "id", [], "any", false, false, false, 81)]), "html", null, true);
+                        // line 83
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("post_repost", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["repost"], "id", [], "any", false, false, false, 83)]), "html", null, true);
                         yield "\" method=\"POST\">
                                                     <textarea name=\"comment\" placeholder=\"\"></textarea>
                                                     <button type=\"submit\">Repondre</button>
@@ -257,26 +255,26 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
                     $_parent = $context['_parent'];
                     unset($context['_seq'], $context['_iterated'], $context['_key'], $context['repost'], $context['_parent'], $context['loop']);
                     $context = array_intersect_key($context, $_parent) + $_parent;
-                    // line 88
+                    // line 90
                     yield "                                </div>
                             ";
                 }
-                // line 90
+                // line 92
                 yield "                        </div>
                     ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['post'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 92
+            // line 94
             yield "                </div>
             ";
         } else {
-            // line 94
+            // line 96
             yield "                <p>Aucun post disponible.</p>
             ";
         }
-        // line 96
+        // line 98
         yield "        </section>
     </div>
     <script>
@@ -322,7 +320,7 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  280 => 96,  276 => 94,  272 => 92,  265 => 90,  261 => 88,  248 => 81,  242 => 78,  234 => 73,  230 => 72,  226 => 70,  220 => 67,  217 => 66,  215 => 65,  210 => 63,  206 => 61,  202 => 60,  198 => 58,  196 => 57,  188 => 52,  182 => 49,  174 => 44,  170 => 43,  163 => 39,  159 => 38,  156 => 37,  150 => 34,  147 => 33,  145 => 32,  140 => 30,  136 => 28,  132 => 27,  129 => 26,  127 => 25,  121 => 21,  115 => 18,  111 => 17,  107 => 16,  101 => 14,  99 => 13,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
+        return array (  278 => 98,  274 => 96,  270 => 94,  263 => 92,  259 => 90,  246 => 83,  240 => 80,  232 => 75,  228 => 74,  224 => 72,  218 => 69,  215 => 68,  213 => 67,  208 => 65,  204 => 63,  200 => 62,  196 => 60,  194 => 59,  186 => 54,  180 => 51,  172 => 46,  168 => 45,  161 => 41,  157 => 40,  154 => 39,  148 => 36,  145 => 35,  143 => 34,  138 => 32,  134 => 30,  130 => 29,  127 => 28,  125 => 27,  114 => 19,  108 => 16,  102 => 13,  96 => 10,  92 => 8,  82 => 7,  70 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -336,17 +334,19 @@ class __TwigTemplate_662feaaca429b76d56ef2f894b278673 extends Template
 {% block body %}
     <div class=\"home\">
         <h1>Accueil</h1>
-        <!-- Affichage des informations de session -->
-        <div class=\"session-info\">
-            <h3>Informations de session</h3>
-            {% if username is not empty %}
-                <p>Nom d'utilisateur : {{ username }}</p>
-                <div class=\"session-actions\">
-                    <a href=\"{{ path('app_logout') }}\" class=\"btn btn-danger\">Se Déconnecter</a>
-                    <a href=\"{{ path('new_post') }}\" class=\"btn btn-primary\">Créer un Post</a>
-                    <a href=\"{{ path('app_user_edit') }}\" class=\"btn btn-primary\">Modifier mes informations</a>
+<h2>Bienvenue {{ username }}</h2>
+
+        <div class=\"user-actions\">
+                    <form action=\"{{ path('app_logout') }}\" method=\"POST\">
+                        <button type=\"submit\" class=\"btn btn-danger\">Se Déconnecter</button>
+                    </form>
+                    <form action=\"{{ path('new_post') }}\" method=\"GET\">
+                        <button type=\"submit\" class=\"btn btn-primary\">Créer un Post</button>
+                    </form>
+                    <form action=\"{{ path('app_user_edit') }}\" method=\"GET\">
+                        <button type=\"submit\" class=\"btn btn-primary\">Modifier mes informations</button>
+                    </form>
                 </div>
-            {% endif %}
         </div>
 
         <section class=\"posts-section\">

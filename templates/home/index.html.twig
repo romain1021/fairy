@@ -7,17 +7,19 @@
 {% block body %}
     <div class="home">
         <h1>Accueil</h1>
-        <!-- Affichage des informations de session -->
-        <div class="session-info">
-            <h3>Informations de session</h3>
-            {% if username is not empty %}
-                <p>Nom d'utilisateur : {{ username }}</p>
-                <div class="session-actions">
-                    <a href="{{ path('app_logout') }}" class="btn btn-danger">Se Déconnecter</a>
-                    <a href="{{ path('new_post') }}" class="btn btn-primary">Créer un Post</a>
-                    <a href="{{ path('app_user_edit') }}" class="btn btn-primary">Modifier mes informations</a>
+<h2>Bienvenue {{ username }}</h2>
+
+        <div class="user-actions">
+                    <form action="{{ path('app_logout') }}" method="POST">
+                        <button type="submit" class="btn btn-danger">Se Déconnecter</button>
+                    </form>
+                    <form action="{{ path('new_post') }}" method="GET">
+                        <button type="submit" class="btn btn-primary">Créer un Post</button>
+                    </form>
+                    <form action="{{ path('app_user_edit') }}" method="GET">
+                        <button type="submit" class="btn btn-primary">Modifier mes informations</button>
+                    </form>
                 </div>
-            {% endif %}
         </div>
 
         <section class="posts-section">
