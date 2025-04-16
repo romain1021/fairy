@@ -15,6 +15,7 @@
                 <div class="session-actions">
                     <a href="{{ path('app_logout') }}" class="btn btn-danger">Se Déconnecter</a>
                     <a href="{{ path('new_post') }}" class="btn btn-primary">Créer un Post</a>
+                    <a href="{{ path('app_user_edit') }}" class="btn btn-primary">Modifier mes informations</a>
                 </div>
             {% endif %}
         </div>
@@ -49,8 +50,8 @@
                             </div>
                             <div class="post-actions">
                                 <form action="{{ path('post_repost', { id: post.id }) }}" method="POST">
-                                    <textarea name="comment" placeholder="Ajoutez un commentaire..."></textarea>
-                                    <button type="submit">Reposter</button>
+                                    <textarea name="comment" placeholder=""></textarea>
+                                    <button type="submit">Repondre</button>
                                 </form>
                             </div>
                             {% if post.reposts|length > 0 %}
@@ -78,8 +79,8 @@
                                             </div>
                                             <div class="repost-actions">
                                                 <form action="{{ path('post_repost', { id: repost.id }) }}" method="POST">
-                                                    <textarea name="comment" placeholder="Ajoutez un commentaire..."></textarea>
-                                                    <button type="submit">Reposter</button>
+                                                    <textarea name="comment" placeholder=""></textarea>
+                                                    <button type="submit">Repondre</button>
                                                 </form>
                                             </div>
                                         </div>

@@ -7,8 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class UserType extends AbstractType
 {
@@ -16,33 +16,19 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Length(['min' => 3]),
-                ],
-                'label' => 'Username',
-                'attr' => ['placeholder' => 'Enter your username'],
+                'label' => 'Nom d\'utilisateur',
             ])
             ->add('email', EmailType::class, [
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Email(),
-                ],
-                'label' => 'Email',
-                'attr' => ['placeholder' => 'Enter your email'],
+                'label' => 'Adresse e-mail',
             ])
-            ->add('password', PasswordType::class, [
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Length(['min' => 6]),
-                ],
-                'label' => 'Password',
-                'attr' => ['placeholder' => 'Enter your password'],
-            ])
-            ->add('bio', TextType::class, [
+            ->add('bio', TextareaType::class, [
+                'label' => 'Biographie',
                 'required' => false,
-                'label' => 'Bio',
-                'attr' => ['placeholder' => 'Tell us about yourself'],
+            ])
+            ->add('plainPassword', PasswordType::class, [
+                'label' => 'Nouveau mot de passe',
+                'mapped' => false,
+                'required' => false,
             ]);
     }
 

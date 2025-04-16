@@ -13,6 +13,8 @@ return [
             [['_route' => 'login_redirect', 'route' => 'login', '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController'], null, null, null, false, false, null],
         ],
         '/post' => [[['_route' => 'post', '_controller' => 'App\\Controller\\PostController::new'], null, null, null, false, false, null]],
+        '/user/edit' => [[['_route' => 'app_user_edit', '_controller' => 'App\\Controller\\UserController::edit'], null, null, null, false, false, null]],
+        '/user/register' => [[['_route' => 'user_register', '_controller' => 'App\\Controller\\UserProfileController::register'], null, null, null, false, false, null]],
         '/login' => [
             [['_route' => 'app_login', '_controller' => 'App\\Controller\\loginControlleur::login'], null, null, null, false, false, null],
             [['_route' => 'login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null],

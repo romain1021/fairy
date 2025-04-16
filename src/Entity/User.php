@@ -4,6 +4,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 #[ORM\Table(name: "users")]
@@ -24,28 +25,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $password;
 
     #[ORM\Column(type: "text", nullable: true)]
-
-    public static function getUserById(int $id, object $entityManager): ?array
-    {
-        $userRepository = $entityManager->getRepository(self::class);
-        $user = $userRepository->find($id);
-
-        if (!$user) {
-            return null;
-        }
-
-        return [
-            'id' => $user->getId(),
-            'username' => $user->getUsername(),
-            'email' => $user->getEmail(),
-            'bio' => $user->getBio(),
-            'profilePicture' => $user->getProfilePicture(),
-            'isVerified' => $user->isVerified(),
-        ];
-    }
     private ?string $bio = null;
 
     #[ORM\Column(type: "string", length: 255, nullable: true)]
+    #[Assert\Image(
+        maxSize: '2M',
+        mimeTypes: ['image/jpeg', 'image/png', 'image/gif'],
+        mimeTypesMessage: 'Veuillez télécharger une image valide (JPEG, PNG, GIF).'
+    )]
     private ?string $profilePicture = null;
 
     #[ORM\Column(type: "boolean")]
@@ -137,6 +124,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getProfilePictureUrl(): ?string
+    {
+        return $this->profilePicture ? '/uploads/profile_pictures/' . $this->profilePicture : null;
+    }
+
     public function isVerified(): bool
     {
         return $this->isVerified;
@@ -162,5 +154,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // If storing any sensitive data temporarily, clear it here
+    }
+
+    public static function getUserById(int $id, object $entityManager): ?array
+    {
+        $userRepository = $entityManager->getRepository(self::class);
+        $user = $userRepository->find($id);
+
+        if (!$user) {
+            return null;
+        }
+
+        return [
+            'id' => $user->getId(),
+            'username' => $user->getUsername(),
+            'email' => $user->getEmail(),
+            'bio' => $user->getBio(),
+            'profilePicture' => $user->getProfilePicture(),
+            'isVerified' => $user->isVerified(),
+        ];
     }
 }

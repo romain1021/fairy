@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\UserType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
@@ -32,5 +35,30 @@ class UserController extends AbstractController
         ]);
 
         return new JsonResponse(['success' => 'Utilisateur suivi avec succès.']);
+    }
+
+    #[Route('/user/edit', name: 'app_user_edit')]
+    public function edit(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(UserType::class, $user); // Les données actuelles de l'utilisateur sont préremplies
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $plainPassword = $form->get('plainPassword')->getData();
+            if ($plainPassword) {
+                $encodedPassword = $passwordEncoder->encodePassword($user, $plainPassword);
+                $user->setPassword($encodedPassword);
+            }
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Vos informations ont été mises à jour.');
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('auth/edit_user.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

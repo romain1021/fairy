@@ -6,6 +6,8 @@ return [
     'home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
     'post' => [[], ['_controller' => 'App\\Controller\\PostController::new'], [], [['text', '/post']], [], [], []],
     'user_follow' => [['id'], ['_controller' => 'App\\Controller\\UserController::follow'], [], [['text', '/follow'], ['variable', '/', '[^/]++', 'id', true], ['text', '/user']], [], [], []],
+    'app_user_edit' => [[], ['_controller' => 'App\\Controller\\UserController::edit'], [], [['text', '/user/edit']], [], [], []],
+    'user_register' => [[], ['_controller' => 'App\\Controller\\UserProfileController::register'], [], [['text', '/user/register']], [], [], []],
     'app_login' => [[], ['_controller' => 'App\\Controller\\loginControlleur::login'], [], [['text', '/login']], [], [], []],
     'app_logout' => [[], ['_controller' => 'App\\Controller\\loginControlleur::logout'], [], [['text', '/logout']], [], [], []],
     'app_user_home' => [[], ['_controller' => 'App\\Controller\\loginControlleur::userHome'], [], [['text', '/user/home']], [], [], []],

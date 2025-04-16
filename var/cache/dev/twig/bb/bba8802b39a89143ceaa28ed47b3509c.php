@@ -64,13 +64,23 @@ class __TwigTemplate_ffe502fbb3bec23fd9ec8dd0e7ce4b5d extends Template
         // line 12
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("home");
         yield "\">Accueil</a>
-        </nav>
+            ";
+        // line 13
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 13, $this->source); })()), "user", [], "any", false, false, false, 13)) {
+            // line 14
+            yield "                <a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_user_edit");
+            yield "\" class=\"btn btn-primary\">Modifier mes informations</a>
+            ";
+        }
+        // line 16
+        yield "        </nav>
     </header>
     <main>
         ";
-        // line 16
+        // line 19
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 17
+        // line 20
         yield "    </main>
 </body>
 </html>";
@@ -103,7 +113,7 @@ class __TwigTemplate_ffe502fbb3bec23fd9ec8dd0e7ce4b5d extends Template
         return; yield '';
     }
 
-    // line 16
+    // line 19
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -143,7 +153,7 @@ class __TwigTemplate_ffe502fbb3bec23fd9ec8dd0e7ce4b5d extends Template
      */
     public function getDebugInfo()
     {
-        return array (  107 => 16,  87 => 6,  74 => 17,  72 => 16,  65 => 12,  57 => 7,  53 => 6,  46 => 1,);
+        return array (  117 => 19,  97 => 6,  84 => 20,  82 => 19,  77 => 16,  71 => 14,  69 => 13,  65 => 12,  57 => 7,  53 => 6,  46 => 1,);
     }
 
     public function getSourceContext()
@@ -160,6 +170,9 @@ class __TwigTemplate_ffe502fbb3bec23fd9ec8dd0e7ce4b5d extends Template
     <header>
         <nav>
             <a href=\"{{ path('home') }}\">Accueil</a>
+            {% if app.user %}
+                <a href=\"{{ path('app_user_edit') }}\" class=\"btn btn-primary\">Modifier mes informations</a>
+            {% endif %}
         </nav>
     </header>
     <main>

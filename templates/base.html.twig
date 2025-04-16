@@ -10,6 +10,9 @@
     <header>
         <nav>
             <a href="{{ path('home') }}">Accueil</a>
+            {% if app.user %}
+                <a href="{{ path('app_user_edit') }}" class="btn btn-primary">Modifier mes informations</a>
+            {% endif %}
         </nav>
     </header>
     <main>
