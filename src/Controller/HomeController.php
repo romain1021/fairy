@@ -11,6 +11,8 @@ use App\Entity\User;
 use App\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Entity\Vote;
+use App\controller\VoteController;
 
 class HomeController extends AbstractController
 {
@@ -31,6 +33,9 @@ class HomeController extends AbstractController
         foreach ($posts as $post) {
             $user = $post->getUser();
             $post->username = $user ? $user->getUsername() : 'Utilisateur inconnu';
+            $post->nbVote = $entityManager->getRepository(VoteController::class)->findByIdNbVote($post->getId());
+            $post->note = $entityManager->getRepository(VoteController::class)->findByIdMoyenne($post->getId());
+
         }
 
         return $this->render('home/index.html.twig', [

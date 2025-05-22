@@ -40,6 +40,10 @@
                                 <button class="like-button" data-post-id="{{ post.id }}">j'aime</button>
                                 <span>{{ post.getLikesCount() }} likes</span>
                             </div>
+                            <div class='note'>
+                                
+                                <spawn> Note moyenne: {{ post.note }}/10 ({{post.nbVote}} votes)</span>
+                                </div>
                             <div class="post-author">
                                 <strong>
                                     <a href="{{ path('user_profile', { id: post.userId }) }}">
